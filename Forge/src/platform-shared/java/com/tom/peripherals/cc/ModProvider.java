@@ -1,11 +1,8 @@
-package com.tom.peripherals.platform;
+package com.tom.peripherals.cc;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.entity.BlockEntity;
 
-import com.tom.peripherals.cc.CCComputer;
 import com.tom.peripherals.util.ITMPeripheral;
 import com.tom.peripherals.util.ITMPeripheral.IComputer;
 
@@ -16,17 +13,13 @@ import dan200.computercraft.api.lua.MethodResult;
 import dan200.computercraft.api.peripheral.IComputerAccess;
 import dan200.computercraft.api.peripheral.IDynamicPeripheral;
 import dan200.computercraft.api.peripheral.IPeripheral;
-import dan200.computercraft.api.peripheral.IPeripheralProvider;
 
-public class ModProvider implements IPeripheralProvider {
-	public static final ModProvider INSTANCE = new ModProvider();
+public class ModProvider {
 	private ModProvider() {
 	}
 
-	@Override
-	public IPeripheral getPeripheral(Level world, BlockPos pos, Direction side) {
-		BlockEntity be = world.getBlockEntity(pos);
-		return be instanceof IPeripheralBlockEntity p && p.getPeripheral() != null ? new PeripheralWrapper(p.getPeripheral(), world, pos, world.getGameTime()) : null;
+	public static IPeripheral map(ITMPeripheral p, Level world, BlockPos pos) {
+		return new PeripheralWrapper(p, world, pos, world.getGameTime());
 	}
 
 	public static class PeripheralWrapper implements IPeripheral, IDynamicPeripheral {

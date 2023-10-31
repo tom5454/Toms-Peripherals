@@ -9,11 +9,11 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.EntityBlock;
+import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition.Builder;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.BlockHitResult;
 
 import com.tom.peripherals.Content;
@@ -22,7 +22,7 @@ import com.tom.peripherals.block.entity.MonitorBlockEntity;
 public class MonitorBlock extends Block implements EntityBlock {
 
 	public MonitorBlock() {
-		super(Block.Properties.of(Material.GLASS, DyeColor.BLACK).lightLevel(b -> 12).strength(5).noOcclusion());
+		super(Block.Properties.of().mapColor(DyeColor.WHITE).sound(SoundType.GLASS).lightLevel(b -> 12).strength(5).noOcclusion());
 	}
 
 	@Override

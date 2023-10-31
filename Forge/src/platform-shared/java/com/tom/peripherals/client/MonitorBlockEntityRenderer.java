@@ -1,18 +1,19 @@
 package com.tom.peripherals.client;
 
+import org.joml.Matrix3f;
+import org.joml.Matrix4f;
+import org.joml.Vector3f;
+
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.core.Direction;
-import net.minecraft.core.Direction.Axis;
 import net.minecraft.resources.ResourceLocation;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.math.Matrix3f;
-import com.mojang.math.Matrix4f;
-import com.mojang.math.Vector3f;
+import com.mojang.math.Axis;
 
 import com.tom.peripherals.block.entity.MonitorBlockEntity;
 import com.tom.peripherals.screen.TextureCacheImpl;
@@ -32,16 +33,16 @@ public class MonitorBlockEntityRenderer implements BlockEntityRenderer<MonitorBl
 		stack.pushPose();
 		Direction facing = te.getDirection();
 		stack.translate(0.5d, 0.5d, 0.5d);
-		if (facing.getAxis() != Axis.Y)
-			stack.mulPose(Vector3f.YP.rotationDegrees(-facing.toYRot()));
+		if (facing.getAxis() != Direction.Axis.Y)
+			stack.mulPose(Axis.YP.rotationDegrees(-facing.toYRot()));
 		else {
-			stack.mulPose(Vector3f.XP.rotationDegrees(-facing.getStepY() * 90));
+			stack.mulPose(Axis.XP.rotationDegrees(-facing.getStepY() * 90));
 		}
 		stack.translate(-0.5d, -0.5d, -0.5d);
 		Matrix4f mat = stack.last().pose();
 		Matrix3f nor = stack.last().normal();
 		Vector3f n = new Vector3f(facing.getStepX(), facing.getStepY(), facing.getStepZ());
-		n.transform(nor);
+		n.mul(nor);
 		VertexConsumer buf = buffer.getBuffer(RenderType.entityTranslucent(tex));
 
 		float z = 1.001F;

@@ -8,11 +8,11 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.EntityBlock;
+import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.Material;
 
 import com.tom.peripherals.Content;
 import com.tom.peripherals.block.entity.RedstonePortBlockEntity;
@@ -23,7 +23,7 @@ import dan200.computercraft.shared.common.IBundledRedstoneBlock;
 public class RedstonePortBlock extends Block implements EntityBlock, IForgeBlock, IBundledRedstoneBlock {
 
 	public RedstonePortBlock() {
-		super(Block.Properties.of(Material.METAL, DyeColor.RED).strength(5).isRedstoneConductor((a, b, c) -> false));
+		super(Block.Properties.of().mapColor(DyeColor.RED).sound(SoundType.METAL).strength(5).isRedstoneConductor((a, b, c) -> false));
 	}
 
 	@Override
@@ -70,11 +70,6 @@ public class RedstonePortBlock extends Block implements EntityBlock, IForgeBlock
 		var entity = world.getBlockEntity(pos);
 		if (!(entity instanceof RedstonePortBlockEntity te)) return 0;
 		return te.getExternalBundledRedstoneOutput(side);
-	}
-
-	@Override
-	public boolean getBundledRedstoneConnectivity(Level var1, BlockPos var2, Direction var3) {
-		return true;
 	}
 
 	@Override

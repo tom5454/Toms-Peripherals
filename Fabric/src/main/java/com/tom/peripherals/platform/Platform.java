@@ -1,8 +1,15 @@
 package com.tom.peripherals.platform;
 
-import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
+import java.util.ArrayList;
+import java.util.List;
+
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
+import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.item.CreativeModeTab;
@@ -16,12 +23,27 @@ import com.tom.peripherals.platform.GameObject.GameRegistry;
 import com.tom.peripherals.platform.GameObject.GameRegistryBE;
 
 public class Platform {
-	public static final GameRegistry<Item> ITEMS = new GameRegistry<>(Registry.ITEM);
-	public static final GameRegistry<Block> BLOCKS = new GameRegistry<>(Registry.BLOCK);
-	public static final GameRegistryBE BLOCK_ENTITY = new GameRegistryBE(Registry.BLOCK_ENTITY_TYPE);
+	public static final GameRegistry<Item> ITEMS = new GameRegistry<>(BuiltInRegistries.ITEM);
+	public static final GameRegistry<Block> BLOCKS = new GameRegistry<>(BuiltInRegistries.BLOCK);
+	public static final GameRegistryBE BLOCK_ENTITY = new GameRegistryBE(BuiltInRegistries.BLOCK_ENTITY_TYPE);
 	private static MinecraftServer serverInst;
 
-	public static final CreativeModeTab MOD_TAB = FabricItemGroupBuilder.build(new ResourceLocation(PeripheralsMod.ID, "tab"), () -> new ItemStack(Content.gpu.get()));
+	private static List<Item> tabItems = new ArrayList<>();
+
+	public static <I extends Item> I addItemToTab(I item) {
+		tabItems.add(item);
+		return item;
+	}
+
+	private static final ResourceKey<CreativeModeTab> ITEM_GROUP = ResourceKey.create(Registries.CREATIVE_MODE_TAB, new ResourceLocation(PeripheralsMod.ID, "tab"));
+
+	public static final CreativeModeTab MOD_TAB = FabricItemGroup.builder().title(Component.translatable("itemGroup.toms_peripherals.tab")).icon(() -> new ItemStack(Content.gpu.get())).displayItems((p, out) -> {
+		tabItems.forEach(out::accept);
+	}).build();
+
+	static {
+		Registry.register(BuiltInRegistries.CREATIVE_MODE_TAB, ITEM_GROUP, MOD_TAB);
+	}
 
 	public static void register() {
 		Platform.BLOCK_ENTITY.register();

@@ -27,8 +27,8 @@ public class Content {
 	public static final GameObject<WatchDogTimerBlock> wdt = blockWithItem("wdt", WatchDogTimerBlock::new);
 	public static final GameObject<RedstonePortBlock> redstonePort = blockWithItem("redstone_port", RedstonePortBlock::new);
 
-	public static final GameObject<Item> gpuChip = item("gpu_chip", () -> new Item(new Item.Properties().tab(Platform.MOD_TAB)));
-	public static final GameObject<Item> gpuChipRaw = item("gpu_chip_raw", () -> new Item(new Item.Properties().tab(Platform.MOD_TAB)));
+	public static final GameObject<Item> gpuChip = item("gpu_chip", () -> new Item(new Item.Properties()));
+	public static final GameObject<Item> gpuChipRaw = item("gpu_chip_raw", () -> new Item(new Item.Properties()));
 
 	public static final GameObjectBlockEntity<GPUBlockEntity> gpuBE = blockEntity("gpu", GPUBlockEntity::new, gpu);
 	public static final GameObjectBlockEntity<MonitorBlockEntity> monitorBE = blockEntity("monitor", MonitorBlockEntity::new, monitor);
@@ -36,7 +36,7 @@ public class Content {
 	public static final GameObjectBlockEntity<RedstonePortBlockEntity> redstonePortBE = blockEntity("redstone_port", RedstonePortBlockEntity::new, redstonePort);
 
 	private static <B extends Block> GameObject<B> blockWithItem(String name, Supplier<B> create) {
-		return blockWithItem(name, create, b -> new BlockItem(b, new Item.Properties().tab(Platform.MOD_TAB)));
+		return blockWithItem(name, create, b -> new BlockItem(b, new Item.Properties()));
 	}
 
 	private static <B extends Block, I extends Item> GameObject<B> blockWithItem(String name, Supplier<B> create, Function<Block, I> createItem) {

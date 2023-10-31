@@ -7,13 +7,13 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.EntityBlock;
+import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition.Builder;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
@@ -25,7 +25,7 @@ import dan200.computercraft.shared.peripheral.modem.ModemShapes;
 public class WatchDogTimerBlock extends Block implements EntityBlock {
 
 	public WatchDogTimerBlock() {
-		super(Block.Properties.of(Material.STONE, DyeColor.GRAY).dynamicShape().strength(3).noOcclusion());
+		super(Block.Properties.of().mapColor(DyeColor.GRAY).sound(SoundType.STONE).dynamicShape().strength(3).noOcclusion());
 	}
 
 	@Override

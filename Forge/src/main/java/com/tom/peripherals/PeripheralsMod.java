@@ -14,15 +14,12 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
 import com.mojang.logging.LogUtils;
 
-import com.tom.peripherals.platform.ModProvider;
 import com.tom.peripherals.platform.Platform;
 import com.tom.peripherals.screen.font.FontManager;
 import com.tom.peripherals.top.TheOneProbeHandler;
 import com.tom.peripherals.util.AWTImageIO;
 import com.tom.peripherals.util.ImageIO;
 import com.tom.peripherals.util.NativeImageIO;
-
-import dan200.computercraft.api.ComputerCraftAPI;
 
 @Mod(PeripheralsMod.ID)
 public class PeripheralsMod {
@@ -47,7 +44,6 @@ public class PeripheralsMod {
 	}
 
 	private void setup(FMLCommonSetupEvent e) {
-		ComputerCraftAPI.registerPeripheralProvider(ModProvider.INSTANCE);
 		FontManager.init();
 	}
 

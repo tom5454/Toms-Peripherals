@@ -15,7 +15,7 @@ import com.tom.peripherals.util.ITMPeripheral.ObjectWrapper;
 import com.tom.peripherals.util.ITMPeripheral.TMLuaObject;
 import com.tom.peripherals.util.TickerUtil.TickableServer;
 
-import dan200.computercraft.shared.BundledRedstone;
+import dan200.computercraft.impl.BundledRedstone;
 import dan200.computercraft.shared.util.DirectionUtil;
 import dan200.computercraft.shared.util.RedstoneUtil;
 
