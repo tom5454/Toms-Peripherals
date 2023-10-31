@@ -14,7 +14,6 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.IForgeRegistry;
-import net.minecraftforge.registries.IForgeRegistryEntry;
 import net.minecraftforge.registries.RegistryObject;
 
 import com.tom.peripherals.PeripheralsMod;
@@ -30,7 +29,7 @@ public class GameObject<T> {
 		return value.get();
 	}
 
-	public static class GameRegistry<T extends IForgeRegistryEntry<T>> {
+	public static class GameRegistry<T> {
 		protected final DeferredRegister<T> handle;
 
 		public GameRegistry(IForgeRegistry<T> reg) {
@@ -53,7 +52,7 @@ public class GameObject<T> {
 	public static class GameRegistryBE extends GameRegistry<BlockEntityType<?>> {
 
 		public GameRegistryBE() {
-			super(ForgeRegistries.BLOCK_ENTITIES);
+			super(ForgeRegistries.BLOCK_ENTITY_TYPES);
 		}
 
 		@SuppressWarnings("unchecked")

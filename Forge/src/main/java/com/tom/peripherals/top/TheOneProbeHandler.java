@@ -2,7 +2,7 @@ package com.tom.peripherals.top;
 
 import java.util.function.Function;
 
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
@@ -51,12 +51,12 @@ public class TheOneProbeHandler implements Function<ITheOneProbe, Void>, IProbeI
 					.textureHeight(32);
 			IProbeInfo horizontal = probeInfo.horizontal(alignment);
 			if (be.isEnabled()) {
-				horizontal.icon(ICONS, 0, offs, dim, dim, iconStyle).text(CompoundText.create().style(TextStyleClass.OK).text(new TranslatableComponent("label.toms_peripherals.wdt.enabled")));
+				horizontal.icon(ICONS, 0, offs, dim, dim, iconStyle).text(CompoundText.create().style(TextStyleClass.OK).text(Component.translatable("label.toms_peripherals.wdt.enabled")));
 			} else {
-				horizontal.icon(ICONS, 16, offs, dim, dim, iconStyle).text(CompoundText.create().style(TextStyleClass.WARNING).text(new TranslatableComponent("label.toms_peripherals.wdt.disabled")));
+				horizontal.icon(ICONS, 16, offs, dim, dim, iconStyle).text(CompoundText.create().style(TextStyleClass.WARNING).text(Component.translatable("label.toms_peripherals.wdt.disabled")));
 			}
-			probeInfo.text(new TranslatableComponent("label.toms_peripherals.wdt.timeLimit", ticksToElapsedTime(be.getTimeLimit())));
-			probeInfo.text(new TranslatableComponent("label.toms_peripherals.wdt.timer", ticksToElapsedTime(be.getTimer())));
+			probeInfo.text(Component.translatable("label.toms_peripherals.wdt.timeLimit", ticksToElapsedTime(be.getTimeLimit())));
+			probeInfo.text(Component.translatable("label.toms_peripherals.wdt.timer", ticksToElapsedTime(be.getTimer())));
 		}
 	}
 

@@ -42,7 +42,7 @@ dependencies {
 	// Fabric API. This is technically optional, but you probably want it anyway.
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 	
-	modImplementation("com.terraformersmc:modmenu:3.1.0") {
+	modImplementation("com.terraformersmc:modmenu:4.0.6") {
         exclude(group: "net.fabricmc.fabric-api")
     }
     
@@ -52,20 +52,20 @@ dependencies {
     
     modImplementation "me.shedaniel.cloth.api:cloth-utils-v1:2.0.54"
     
-    modImplementation("curse.maven:cc-restitched-462672:3838648")
+    modImplementation("curse.maven:cc-restitched-462672:3908334")
     
 	implementation "com.electronwill.night-config:core:3.6.3"
     implementation "com.electronwill.night-config:toml:3.6.3"
-	modImplementation "curse.maven:forge-config-api-port-fabric-547434:3943250"
+	modImplementation "curse.maven:forge-config-api-port-fabric-547434:4401535"
 }
 
 sourceSets {
 	main {
 		java {
-			srcDir "../TomsPeripherals-118/src/platform-shared/java"
+			srcDir "../TomsPeripherals-119/src/platform-shared/java"
 		}
 		resources {
-			srcDir "../TomsPeripherals-118/src/platform-shared/resources"
+			srcDir "../TomsPeripherals-119/src/platform-shared/resources"
 		}
 	}
 }
