@@ -1,0 +1,5 @@
+{
+    "variants": {
+        "": { "model": "toms_peripherals:block/redstone_port"}
+    }
+}

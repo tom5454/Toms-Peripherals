@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+  	"rar",
+    "gcg",
+    "rdr"
+  ],
+  "key": {
+  	"g": {
+      "tag": "forge:ingots/gold"
+    },
+    "c": {
+      "tag": "forge:ingots/copper"
+    },
+    "r": {
+      "tag": "forge:dusts/redstone"
+    },
+    "a": {
+      "tag": "forge:gems/amethyst"
+    },
+    "d": {
+      "tag": "forge:gems/diamond"
+    }
+  },
+  "result": {
+    "item": "toms_peripherals:gpu_chip_raw"
+  }
+}

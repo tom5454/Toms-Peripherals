@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+  	"sms",
+    "cCc",
+    "sRs"
+  ],
+  "key": {
+  	"s": {
+      "tag": "minecraft:stone_crafting_materials"
+    },
+    "c": {
+      "item": "minecraft:comparator"
+    },
+    "C": {
+      "item": "minecraft:clock"
+    },
+    "R": {
+      "tag": "c:redstone_dusts"
+    },
+    "m": {
+      "item": "computercraft:wired_modem"
+    }
+  },
+  "result": {
+    "item": "toms_peripherals:wdt"
+  }
+}

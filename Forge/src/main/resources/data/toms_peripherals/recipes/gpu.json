@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+  	"IbI",
+    "rcr",
+    "ICI"
+  ],
+  "key": {
+  	"I": {
+      "tag": "forge:ingots/iron"
+    },
+    "b": {
+      "item": "minecraft:iron_bars"
+    },
+    "c": {
+      "item": "toms_peripherals:gpu_chip"
+    },
+    "C": {
+      "tag": "forge:ingots/copper"
+    },
+    "r": {
+      "tag": "forge:dusts/redstone"
+    }
+  },
+  "result": {
+    "item": "toms_peripherals:gpu"
+  }
+}

@@ -1,0 +1,12 @@
+{
+    "parent": "block/cube",
+    "textures": {
+        "up": "toms_peripherals:block/monitor_side",
+        "down": "toms_peripherals:block/monitor_side",
+        "north": "toms_peripherals:block/monitor_front",
+        "east": "toms_peripherals:block/monitor_side",
+        "south": "toms_peripherals:block/monitor_side",
+        "west": "toms_peripherals:block/monitor_side",
+        "particle": "toms_peripherals:block/monitor_side"
+    }
+}

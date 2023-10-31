@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "facing=down":  {"y": 0,  "x": 90, "model": "toms_peripherals:block/wdt"},
+    "facing=east":  {"y": 90,  "x": 0, "model": "toms_peripherals:block/wdt"},
+    "facing=north": {"y": 0,   "x": 0, "model": "toms_peripherals:block/wdt"},
+    "facing=south": {"y": 180, "x": 0, "model": "toms_peripherals:block/wdt"},
+    "facing=up":    {"y": 0, "x": 270, "model": "toms_peripherals:block/wdt"},
+    "facing=west":  {"y": 270, "x": 0, "model": "toms_peripherals:block/wdt"}
+  }
+}

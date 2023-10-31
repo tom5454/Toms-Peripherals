@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+	"toms_peripherals:gpu",
+	"toms_peripherals:monitor",
+	"toms_peripherals:redstone_port",
+	"toms_peripherals:wdt"
+  ]
+}
