@@ -38,10 +38,26 @@ public class ParamCheck {
 		return a[arg].toString();
 	}
 
+	public static boolean getBoolean(Object[] a, int arg) throws LuaException {
+		if (!(arg < a.length && a[arg] instanceof Boolean)) {
+			throw new LuaException("Bad argument #" + (arg + 1) + ": (expected Boolean)");
+		}
+		return (Boolean) a[arg];
+	}
+
 	public static IntStream ints(Object[] a, int arg) throws LuaException {
 		return Arrays.stream(a, arg, a.length).mapToInt(e -> {
 			if (e instanceof Double d)
 				return Mth.floor(d);
+			else
+				throw new LuaException("Bad argument #" + (arg + 1) + "-" + a.length + ": (expected Number)");
+		});
+	}
+
+	public static IntStream uints(Object[] a, int arg) throws LuaException {
+		return Arrays.stream(a, arg, a.length).mapToInt(e -> {
+			if (e instanceof Double d)
+				return (int) d.longValue();
 			else
 				throw new LuaException("Bad argument #" + (arg + 1) + "-" + a.length + ": (expected Number)");
 		});

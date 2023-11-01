@@ -1,6 +1,5 @@
 package com.tom.peripherals.screen;
 
-import java.lang.reflect.Field;
 import java.nio.IntBuffer;
 
 import org.lwjgl.system.MemoryUtil;
@@ -76,17 +75,9 @@ public class TextureCacheImpl implements TextureCache {
 		dynTex.upload();
 	}
 
-	//TODO: use ATs
 	private void getBuffer() {
 		dynTex.setPixels(image);
 		TextureUtil.prepareImage(dynTex.getId(), image.getWidth(), image.getHeight());
-		try {
-			Field p = NativeImage.class.getDeclaredField("pixels");
-			p.setAccessible(true);
-			long ptr = p.getLong(image);
-			buffer = MemoryUtil.memIntBuffer(ptr, image.getWidth() * image.getHeight());
-		} catch (Exception e) {
-			throw new RuntimeException(e);
-		}
+		buffer = MemoryUtil.memIntBuffer(image.pixels, image.getWidth() * image.getHeight());
 	}
 }
