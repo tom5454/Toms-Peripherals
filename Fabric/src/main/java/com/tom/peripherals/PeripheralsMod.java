@@ -5,7 +5,7 @@ import org.slf4j.Logger;
 import net.fabricmc.api.ModInitializer;
 
 import net.minecraftforge.api.ModLoadingContext;
-import net.minecraftforge.api.fml.event.config.ModConfigEvent;
+import net.minecraftforge.api.fml.event.config.ModConfigEvents;
 import net.minecraftforge.fml.config.ModConfig;
 
 import com.mojang.logging.LogUtils;
@@ -31,17 +31,13 @@ public class PeripheralsMod implements ModInitializer {
 		ModLoadingContext.registerConfig(ID, ModConfig.Type.COMMON, Config.commonSpec);
 		ModLoadingContext.registerConfig(ID, ModConfig.Type.SERVER, Config.serverSpec);
 
-		ModConfigEvent.LOADING.register(c -> {
-			if (c.getModId().equals(ID)) {
-				LOGGER.info("Loaded Tom's Peripherals config file {}", c.getFileName());
-				Config.load(c);
-			}
+		ModConfigEvents.loading(ID).register(c -> {
+			LOGGER.info("Loaded Tom's Peripherals config file {}", c.getFileName());
+			Config.load(c);
 		});
-		ModConfigEvent.RELOADING.register(c -> {
-			if (c.getModId().equals(ID)) {
-				LOGGER.info("Tom's Peripherals config just got changed on the file system!");
-				Config.load(c);
-			}
+		ModConfigEvents.reloading(ID).register(c -> {
+			LOGGER.info("Tom's Peripherals config just got changed on the file system!");
+			Config.load(c);
 		});
 	}
 

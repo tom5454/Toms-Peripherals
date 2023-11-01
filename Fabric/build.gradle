@@ -10,10 +10,6 @@ maven { url "https://maven.shedaniel.me/" }
 maven { url "https://maven.terraformersmc.com/releases/"}
 maven { url "https://maven.architectury.dev/" }
 maven {
-		name = "Ladysnake Libs"
-		url = 'https://maven.ladysnake.org/releases'
-	}
-maven {
     // location of the maven that hosts JEI files since January 2023
     name = "Jared's maven"
     url = "https://maven.blamejared.com/"
@@ -23,6 +19,10 @@ maven {
         content {
             includeGroup "curse.maven"
         }
+    }
+    maven {
+        name "SquidDev"
+        url "https://squiddev.cc/maven"
     }
 }
 
@@ -52,11 +52,17 @@ dependencies {
     
     modImplementation "me.shedaniel.cloth.api:cloth-utils-v1:2.0.54"
     
+    modImplementation 'org.squiddev:Cobalt:0.5.5'
+    runtimeOnly "io.netty:netty-codec-http:4.1.77.Final"
     modImplementation("curse.maven:cc-restitched-462672:3908334")
     
 	implementation "com.electronwill.night-config:core:3.6.3"
     implementation "com.electronwill.night-config:toml:3.6.3"
 	modImplementation "curse.maven:forge-config-api-port-fabric-547434:4401535"
+}
+
+loom {
+	accessWidenerPath = file("src/main/resources/toms_peripherals.accesswidener")
 }
 
 sourceSets {

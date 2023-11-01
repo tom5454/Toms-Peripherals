@@ -6,7 +6,7 @@
 # The name of the mod loader type to load - for regular FML @Mod mods it should be javafml
 modLoader="javafml" #mandatory
 # A version range to match for said mod loader - for regular FML @Mod it will be the forge version
-loaderVersion="[40,)" #mandatory This is typically bumped every Minecraft version by Forge. See our download page for lists of versions.
+loaderVersion="[41,)" #mandatory This is typically bumped every Minecraft version by Forge. See our download page for lists of versions.
 # The license for you mod. This is mandatory metadata and allows for easier comprehension of your redistributive properties.
 # Review your options at https://choosealicense.com/. All rights reserved is the default copyright stance, and is thus the default here.
 license="MIT License"
@@ -21,9 +21,9 @@ version="${file.jarVersion}" #mandatory
  # A display name for the mod
 displayName="Tom's Peripherals" #mandatory
 # A URL to query for updates for this mod. See the JSON update specification <here>
-# updateJSONURL="" #optional
+updateJSONURL="https://raw.githubusercontent.com/tom5454/Toms-Peripherals/main/version-check.json" #optional
 # A URL for the "homepage" for this mod, displayed in the mod UI
-# displayURL="" #optional
+displayURL="https://www.curseforge.com/minecraft/mc-mods/toms-peripherals" #optional
 # A file name (in the root of the mod JAR) containing a logo for display
 logoFile="icon.png" #optional
 # A text field displayed in the mod UI
@@ -41,7 +41,7 @@ description='''
     # Does this dependency have to exist - if not, ordering below must be specified
     mandatory=true #mandatory
     # The version range of the dependency
-    versionRange="[40,)" #mandatory
+    versionRange="[41,)" #mandatory
     # An ordering relationship for the dependency - BEFORE or AFTER required if the relationship is not mandatory
     ordering="NONE"
     # Side this dependency is applied on - BOTH, CLIENT or SERVER
@@ -50,7 +50,7 @@ description='''
 [[dependencies.toms_peripherals]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.18.2,)"
+    versionRange="[1.19,)"
     ordering="NONE"
     side="BOTH"
 [[dependencies.toms_peripherals]]
