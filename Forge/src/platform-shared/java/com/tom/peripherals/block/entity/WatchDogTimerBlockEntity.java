@@ -3,7 +3,6 @@ package com.tom.peripherals.block.entity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.util.Mth;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -15,6 +14,7 @@ import com.tom.peripherals.util.ITMPeripheral.LuaException;
 import com.tom.peripherals.util.ITMPeripheral.LuaMethod;
 import com.tom.peripherals.util.ITMPeripheral.ObjectWrapper;
 import com.tom.peripherals.util.ITMPeripheral.TMLuaObject;
+import com.tom.peripherals.util.ParamCheck;
 import com.tom.peripherals.util.TickerUtil.TickableServer;
 
 public class WatchDogTimerBlockEntity extends AbstractPeripheralBlockEntity implements TickableServer {
@@ -76,11 +76,10 @@ public class WatchDogTimerBlockEntity extends AbstractPeripheralBlockEntity impl
 		public void setEnabled(Object[] a) throws LuaException {
 			if (a.length < 1) {
 				throw new LuaException("Too few arguments (expected enable)");
-			} else if (!(a[0] instanceof Boolean en)) {
-				throw new LuaException("Bad argument #1 (expected Boolean)");
 			}
+			boolean enable = ParamCheck.getBoolean(a, 0);
 			Platform.getServer().execute(() -> {
-				enabled = en;
+				enabled = enable;
 				timer = 0;
 				setChanged();
 			});
@@ -91,10 +90,8 @@ public class WatchDogTimerBlockEntity extends AbstractPeripheralBlockEntity impl
 			if (enabled)throw new LuaException("Can't edit timeout value while the timer is enabled");
 			if (a.length < 1) {
 				throw new LuaException("Too few arguments (expected enable)");
-			} else if (!(a[0] instanceof Double en)) {
-				throw new LuaException("Bad argument #1 (expected Number)");
 			}
-			int time = Mth.floor(en);
+			int time = ParamCheck.getInt(a, 0);
 			if (time < 20) {
 				throw new LuaException("Bad argument #1 (expected value must be larger than 20 ticks)");
 			}

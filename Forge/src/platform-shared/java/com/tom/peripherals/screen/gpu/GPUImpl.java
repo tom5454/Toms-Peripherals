@@ -50,7 +50,7 @@ public class GPUImpl extends BaseGPU {
 	@LuaMethod
 	public Object[] imageFromBuffer(Object[] a) throws LuaException {
 		int w = ParamCheck.getInt(a, 0);
-		int[] d = ParamCheck.ints(a, 1).toArray();
+		int[] d = ParamCheck.uints(a, 1).toArray();
 		Image im = new Image(d, w);
 		LuaImage i = new LuaImage(ctx.getVRam(), im);
 		ctx.getVRam().allocEx(i, d.length * 4);

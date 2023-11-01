@@ -9,9 +9,9 @@
     "tom5454"
   ],
   "contact": {
-    "homepage": "https://www.curseforge.com/minecraft/mc-mods/toms-storage-fabric",
-    "sources": "https://github.com/tom5454/Toms-Storage/tree/fabric",
-	"issues": "https://github.com/tom5454/Toms-Storage/issues"
+    "homepage": "https://www.curseforge.com/minecraft/mc-mods/toms-peripherals",
+    "sources": "https://github.com/tom5454/Toms-Peripherals/tree/main/Fabric",
+	"issues": "https://github.com/tom5454/Toms-Peripherals/issues"
   },
 
   "license": "MIT",
@@ -28,6 +28,7 @@
   },
   "mixins": [
   ],
+  "accessWidener" : "toms_peripherals.accesswidener",
   "depends": {
     "fabricloader": ">=0.7.4",
     "fabric": "*",

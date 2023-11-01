@@ -91,7 +91,7 @@ public class TextureManager {
 			boundTexture.pixels = new Image(img.getImage());
 		} else {
 			int w = ParamCheck.getInt(a, 0);
-			int[] d = ParamCheck.ints(a, 1).toArray();
+			int[] d = ParamCheck.uints(a, 1).toArray();
 			int h = d.length / w;
 			vram.reallocEx(boundTexture, w * h * 4);
 			boundTexture.pixels = new Image(d, w);

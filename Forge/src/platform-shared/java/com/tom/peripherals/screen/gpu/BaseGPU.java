@@ -478,7 +478,7 @@ public class BaseGPU extends TMLuaObject {
 		int y = ParamCheck.getInt(a, 1) - 1;
 		int w = ParamCheck.getInt(a, 2);
 		int s = ParamCheck.getInt(a, 3);
-		int[] d = ParamCheck.ints(a, 4).toArray();
+		int[] d = ParamCheck.uints(a, 4).toArray();
 		if (x < 0 || (w * s + x) > ctx.getWidth()) {
 			throw new LuaException("Out of boundary x");
 		}
