@@ -1,6 +1,0 @@
-{
-    "parent": "block/cube_all",
-    "textures": {
-        "all": "toms_peripherals:block/redstone_port"
-    }
-}

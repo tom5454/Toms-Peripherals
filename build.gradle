@@ -1,0 +1,73 @@
+plugins {
+    id 'java-library' 
+    id 'maven-publish'
+}
+
+version = project.mod_version
+group = 'com.tom.peripherals' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+archivesBaseName = 'TomsPeripherals-API'
+
+java.toolchain.languageVersion = JavaLanguageVersion.of(17)
+
+repositories {
+    mavenCentral()
+    maven {
+    	url "https://libraries.minecraft.net"
+    }
+}
+
+dependencies {
+    implementation "com.google.guava:guava:21.0"
+}
+
+sourceSets {
+	main {
+		java {
+			srcDir "src/shared/java"
+		}
+		resources {
+			srcDir "src/shared/resources"
+		}
+	}
+}
+
+task sourcesJar(type: Jar, dependsOn: classes) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+artifacts {
+    archives sourcesJar
+}
+
+// Example for how to get properties into the manifest for reading by the runtime..
+jar {
+    manifest {
+        attributes([
+            "Specification-Title": project.name,
+            "Specification-Vendor": "tom5454",
+            "Specification-Version": "1", // We are version 1 of ourselves
+            "Implementation-Title": project.name,
+            "Implementation-Version": "${version}",
+            "Implementation-Vendor" : "tom5454",
+            "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
+        ])
+    }
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            artifact jar
+            artifact sourcesJar
+        }
+    }
+    repositories {
+        def mavenURL = System.getProperty("mavenDir")
+		if ("${mavenURL}" != "null") {
+			maven {
+				url = file(mavenURL)
+			}
+		}
+    }
+}
