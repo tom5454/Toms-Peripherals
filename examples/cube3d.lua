@@ -20,7 +20,7 @@ local tris = {
     { 1.0, 0.0, 1.0,    0.0, 0.0, 0.0,    1.0, 0.0, 0.0 },
 };
 local gpu = peripheral.wrap("tm_gpu_0")
-gpu.sync()
+gpu.refreshSize()
 gpu.setSize(64)
 local gl = gpu.createWindow3D(1, 1, 768, 320)
 gl.glFrustum(90, 0.1, 1000)
