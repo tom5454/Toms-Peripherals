@@ -43,7 +43,7 @@ public class TextureCacheImpl implements TextureCache {
 
 	@Override
 	public ResourceLocation getTexture() {
-		if (be == null || be.screen == null)return null;
+		if (be == null || be.screen.length == 0)return null;
 
 		Minecraft mc = Minecraft.getInstance();
 		if(mc.getTextureManager().getTexture(loc) == null)

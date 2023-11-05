@@ -1,6 +1,6 @@
 package com.tom.peripherals.platform;
 
-import com.tom.peripherals.util.ITMPeripheral;
+import com.tom.peripherals.api.ITMPeripheral;
 
 public interface IPeripheralBlockEntity {
 	ITMPeripheral getPeripheral();

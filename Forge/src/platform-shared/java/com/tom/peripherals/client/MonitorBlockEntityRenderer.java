@@ -25,7 +25,7 @@ public class MonitorBlockEntityRenderer implements BlockEntityRenderer<MonitorBl
 	@Override
 	public void render(MonitorBlockEntity te, float partical, PoseStack stack, MultiBufferSource buffer,
 			int pPackedLight, int pPackedOverlay) {
-		if (te.screen == null)return;
+		if (te.screen.length == 0)return;
 		if (te.clientCache == null)te.clientCache = new TextureCacheImpl(te);
 		ResourceLocation tex = te.clientCache.getTexture();
 		if (tex == null)return;
