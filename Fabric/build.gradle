@@ -27,6 +27,13 @@ maven {
       includeModule("org.squiddev", "Cobalt")
     }
   }
+  maven {
+    	url = "http://localhost:8000"
+		allowInsecureProtocol true
+		content {
+            includeGroup "local"
+        }
+	}
 }
 
 sourceCompatibility = JavaVersion.VERSION_17
@@ -71,9 +78,11 @@ sourceSets {
 	main {
 		java {
 			srcDir "../TomsPeripherals-120/src/platform-shared/java"
+			srcDir "../TomsPeripherals/src/shared/java"
 		}
 		resources {
 			srcDir "../TomsPeripherals-120/src/platform-shared/resources"
+			srcDir "../TomsPeripherals/src/shared/resources"
 		}
 	}
 }

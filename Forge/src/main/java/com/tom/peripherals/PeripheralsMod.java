@@ -14,17 +14,15 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
 import com.mojang.logging.LogUtils;
 
+import com.tom.peripherals.gpu.font.FontManager;
 import com.tom.peripherals.platform.Platform;
-import com.tom.peripherals.screen.font.FontManager;
 import com.tom.peripherals.top.TheOneProbeHandler;
-import com.tom.peripherals.util.AWTImageIO;
 import com.tom.peripherals.util.ImageIO;
 import com.tom.peripherals.util.NativeImageIO;
 
 @Mod(PeripheralsMod.ID)
 public class PeripheralsMod {
 	public static final String ID = "toms_peripherals";
-	public static ImageIO imageIO = new AWTImageIO();
 	public static final Logger LOGGER = LogUtils.getLogger();
 
 	public PeripheralsMod() {
@@ -40,7 +38,7 @@ public class PeripheralsMod {
 
 	private void doClientStuff(final FMLClientSetupEvent event) {
 		Client.setup();
-		imageIO = new NativeImageIO();
+		ImageIO.handler = new NativeImageIO();
 	}
 
 	private void setup(FMLCommonSetupEvent e) {

@@ -9,14 +9,14 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
 
-import com.tom.peripherals.cc.ModProvider;
-import com.tom.peripherals.util.ITMPeripheral;
+import com.tom.peripherals.api.ITMPeripheral;
+import com.tom.peripherals.cc.CCPeripheral;
 
 import dan200.computercraft.api.peripheral.IPeripheral;
 import dan200.computercraft.shared.Capabilities;
 
 public abstract class AbstractPeripheralBlockEntity extends BlockEntity {
-	private LazyOptional<IPeripheral> cap = LazyOptional.of(() -> ModProvider.map(getPeripheral(), level, worldPosition));
+	private LazyOptional<IPeripheral> cap = LazyOptional.of(() -> CCPeripheral.map(getPeripheral(), level, worldPosition));
 
 	public AbstractPeripheralBlockEntity(BlockEntityType<?> p_155228_, BlockPos p_155229_, BlockState p_155230_) {
 		super(p_155228_, p_155229_, p_155230_);

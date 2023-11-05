@@ -7,13 +7,13 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 
+import com.tom.peripherals.api.LuaException;
+import com.tom.peripherals.api.LuaMethod;
+import com.tom.peripherals.api.ObjectWrapper;
+import com.tom.peripherals.api.TMLuaObject;
 import com.tom.peripherals.cc.ComputerControl;
 import com.tom.peripherals.platform.AbstractPeripheralBlockEntity;
 import com.tom.peripherals.platform.Platform;
-import com.tom.peripherals.util.ITMPeripheral.LuaException;
-import com.tom.peripherals.util.ITMPeripheral.LuaMethod;
-import com.tom.peripherals.util.ITMPeripheral.ObjectWrapper;
-import com.tom.peripherals.util.ITMPeripheral.TMLuaObject;
 import com.tom.peripherals.util.ParamCheck;
 import com.tom.peripherals.util.TickerUtil.TickableServer;
 

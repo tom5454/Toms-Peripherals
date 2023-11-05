@@ -10,8 +10,6 @@ import com.mojang.logging.LogUtils;
 
 import com.tom.peripherals.platform.AbstractPeripheralBlockEntity;
 import com.tom.peripherals.platform.Platform;
-import com.tom.peripherals.util.AWTImageIO;
-import com.tom.peripherals.util.ImageIO;
 
 import dan200.computercraft.api.peripheral.PeripheralLookup;
 
@@ -20,7 +18,6 @@ import fuzs.forgeconfigapiport.api.config.v2.ModConfigEvents;
 
 public class PeripheralsMod implements ModInitializer {
 	public static final String ID = "toms_peripherals";
-	public static ImageIO imageIO = new AWTImageIO();
 	public static final Logger LOGGER = LogUtils.getLogger();
 
 	@Override

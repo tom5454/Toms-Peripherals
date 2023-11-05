@@ -4,7 +4,7 @@
         "facing=south": { "model": "toms_peripherals:block/monitor", "y": 180 },
          "facing=west": { "model": "toms_peripherals:block/monitor", "y": 270 },
          "facing=east": { "model": "toms_peripherals:block/monitor", "y": 90 },
-           "facing=up": { "model": "toms_peripherals:block/monitor", "x": 270 },
-         "facing=down": { "model": "toms_peripherals:block/monitor", "x": 90 }
+           "facing=up": { "model": "toms_peripherals:block/monitor", "x": 270, "y": 180 },
+         "facing=down": { "model": "toms_peripherals:block/monitor", "x": 90, "y": 180 }
     }
 }

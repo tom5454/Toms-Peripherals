@@ -8,11 +8,11 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 
+import com.tom.peripherals.api.LuaException;
+import com.tom.peripherals.api.LuaMethod;
+import com.tom.peripherals.api.ObjectWrapper;
+import com.tom.peripherals.api.TMLuaObject;
 import com.tom.peripherals.platform.AbstractPeripheralBlockEntity;
-import com.tom.peripherals.util.ITMPeripheral.LuaException;
-import com.tom.peripherals.util.ITMPeripheral.LuaMethod;
-import com.tom.peripherals.util.ITMPeripheral.ObjectWrapper;
-import com.tom.peripherals.util.ITMPeripheral.TMLuaObject;
 import com.tom.peripherals.util.TickerUtil.TickableServer;
 
 import dan200.computercraft.impl.BundledRedstone;
