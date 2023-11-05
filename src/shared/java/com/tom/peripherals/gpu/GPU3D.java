@@ -283,4 +283,9 @@ public class GPU3D extends TMLuaObject implements VRAMObject {
 		throw new LuaException("Bad argument #1: unknown GL state" + mode);
 		}
 	}
+
+	@LuaMethod
+	public Object[] getConstants() {
+		return GLConstants.ALL_CONST;
+	}
 }

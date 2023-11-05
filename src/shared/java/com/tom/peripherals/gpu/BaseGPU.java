@@ -64,8 +64,6 @@ public class BaseGPU extends TMLuaObject {
 		} else {
 			color = ParamCheck.toColor(a, 4);
 		}
-		if (color < 0)
-			throw new LuaException("Bad Argument #5, (too small number (" + color + ") minimum value is 0 )");
 		int xStart = ParamCheck.getInt(a, 0) - 1;
 		int yStart = ParamCheck.getInt(a, 1) - 1;
 		int xStop = xStart + ParamCheck.getInt(a, 2);
