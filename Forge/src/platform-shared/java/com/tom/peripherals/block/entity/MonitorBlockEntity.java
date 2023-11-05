@@ -17,7 +17,7 @@ import com.tom.peripherals.screen.TextureCache;
 public class MonitorBlockEntity extends BlockEntity {
 	private BlockPos gpuPos;
 	public TextureCache clientCache;
-	public int[] screen;
+	public int[] screen = new int[0];
 	public int width;
 
 	public MonitorBlockEntity(BlockEntityType<?> p_155228_, BlockPos p_155229_, BlockState p_155230_) {
@@ -34,9 +34,9 @@ public class MonitorBlockEntity extends BlockEntity {
 		int zCoord = worldPosition.getZ();
 		switch(d) {
 		case DOWN:
-			return new BlockPos(xCoord - x, yCoord, zCoord - y);
-		case UP:
 			return new BlockPos(xCoord + x, yCoord, zCoord + y);
+		case UP:
+			return new BlockPos(xCoord + x, yCoord, zCoord - y);
 		case NORTH:
 			return new BlockPos(xCoord - x, yCoord + y, zCoord);
 		case SOUTH:

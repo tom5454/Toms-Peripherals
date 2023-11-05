@@ -1,6 +1,7 @@
 package com.tom.peripherals.block.entity;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Stack;
@@ -13,15 +14,16 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 
 import com.tom.peripherals.Config;
+import com.tom.peripherals.api.IComputer;
+import com.tom.peripherals.api.ITMPeripheral;
+import com.tom.peripherals.api.LuaException;
+import com.tom.peripherals.api.LuaMethod;
+import com.tom.peripherals.gpu.BaseGPU.GPUContext;
+import com.tom.peripherals.gpu.GPUImpl;
+import com.tom.peripherals.gpu.VRAM;
+import com.tom.peripherals.gpu.VRAM.VRAMObject;
 import com.tom.peripherals.platform.AbstractPeripheralBlockEntity;
 import com.tom.peripherals.platform.Platform;
-import com.tom.peripherals.screen.gpu.BaseGPU.GPUContext;
-import com.tom.peripherals.screen.gpu.GPUImpl;
-import com.tom.peripherals.screen.gpu.VRAM;
-import com.tom.peripherals.screen.gpu.VRAM.VRAMObject;
-import com.tom.peripherals.util.ITMPeripheral;
-import com.tom.peripherals.util.ITMPeripheral.LuaException;
-import com.tom.peripherals.util.ITMPeripheral.LuaMethod;
 import com.tom.peripherals.util.ParamCheck;
 
 public class GPUBlockEntity extends AbstractPeripheralBlockEntity {
@@ -94,9 +96,11 @@ public class GPUBlockEntity extends AbstractPeripheralBlockEntity {
 				for (List<MonitorBlockEntity> cMonList : getMonitors(false)) {
 					int index2 = cMonList.size() - 1;
 					for (MonitorBlockEntity mon : cMonList) {
+						var s = mon.screen;
 						mon.screen = separateIntArray(screen, index1, index2, size);
 						mon.width = size;
-						mon.sync();
+						if (!Arrays.equals(s, mon.screen))
+							mon.sync();
 						index2--;
 					}
 					index1++;

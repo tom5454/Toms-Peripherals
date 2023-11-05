@@ -1,1 +1,7 @@
-{"parent": "toms_peripherals:block/monitor"}
+{
+    "parent": "block/cube_all",
+    "textures": {
+		"north": "toms_peripherals:block/monitor_front",
+        "all": "toms_peripherals:block/monitor_side"
+    }
+}

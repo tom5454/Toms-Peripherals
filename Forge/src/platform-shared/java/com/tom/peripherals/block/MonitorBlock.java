@@ -1,11 +1,17 @@
 package com.tom.peripherals.block;
 
+import java.util.List;
+
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.DyeColor;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.EntityBlock;
@@ -18,6 +24,7 @@ import net.minecraft.world.phys.BlockHitResult;
 
 import com.tom.peripherals.Content;
 import com.tom.peripherals.block.entity.MonitorBlockEntity;
+import com.tom.peripherals.client.ClientUtil;
 
 public class MonitorBlock extends Block implements EntityBlock {
 
@@ -47,5 +54,10 @@ public class MonitorBlock extends Block implements EntityBlock {
 			te.onBlockActivated(hit.getDirection(), hit.getLocation().x - pos.getX(), hit.getLocation().y - pos.getY(), hit.getLocation().z - pos.getZ(), player.isSecondaryUseActive());
 		}
 		return state.getValue(BlockStateProperties.FACING) == hit.getDirection() ? InteractionResult.SUCCESS : InteractionResult.PASS;
+	}
+
+	@Override
+	public void appendHoverText(ItemStack stack, BlockGetter world, List<Component> tooltip, TooltipFlag p_49819_) {
+		ClientUtil.tooltip("monitor", tooltip);
 	}
 }

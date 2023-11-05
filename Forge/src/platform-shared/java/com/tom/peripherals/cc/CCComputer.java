@@ -4,14 +4,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.tom.peripherals.util.ITMPeripheral;
-import com.tom.peripherals.util.ITMPeripheral.IComputer;
-import com.tom.peripherals.util.ITMPeripheral.ITMLuaObject;
+import com.tom.peripherals.api.IComputer;
+import com.tom.peripherals.api.ITMLuaObject;
+import com.tom.peripherals.api.LuaException;
 
 import dan200.computercraft.api.lua.IArguments;
 import dan200.computercraft.api.lua.IDynamicLuaObject;
 import dan200.computercraft.api.lua.ILuaContext;
-import dan200.computercraft.api.lua.LuaException;
 import dan200.computercraft.api.lua.MethodResult;
 import dan200.computercraft.api.peripheral.IComputerAccess;
 
@@ -90,16 +89,16 @@ public class CCComputer implements IComputer {
 		}
 
 		@Override
-		public MethodResult callMethod(ILuaContext context, int method, IArguments arguments) throws LuaException {
+		public MethodResult callMethod(ILuaContext context, int method, IArguments arguments) throws dan200.computercraft.api.lua.LuaException {
 			try {
 				return MethodResult.of(mapTo(obj.call(CCComputer.this, obj.getMethodNames()[method], mapFrom(arguments.getAll()))));
-			} catch (ITMPeripheral.LuaException e) {
+			} catch (LuaException e) {
 				throw toLuaException(e);
 			}
 		}
 	}
 	@Override
-	public Object[] pullEvent(String string) throws ITMPeripheral.LuaException {
+	public Object[] pullEvent(String string) throws LuaException {
 		/*try {
 			return context != null ? context.pullEvent(string) : new Object[0];
 		} catch (dan200.computercraft.api.lua.LuaException e) {
@@ -109,7 +108,7 @@ public class CCComputer implements IComputer {
 		}*/
 		return null;
 	}
-	public static dan200.computercraft.api.lua.LuaException toLuaException(ITMPeripheral.LuaException ex){
+	public static dan200.computercraft.api.lua.LuaException toLuaException(LuaException ex){
 		return new dan200.computercraft.api.lua.LuaException(ex.getMessage(), ex.getLevel());
 	}
 	public IComputerAccess getComputer() {

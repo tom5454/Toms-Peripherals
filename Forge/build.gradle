@@ -134,9 +134,11 @@ sourceSets {
 	main {
 		java {
 			srcDir "src/platform-shared/java"
+			srcDir "../TomsPeripherals/src/shared/java"
 		}
 		resources {
 			srcDir "src/platform-shared/resources"
+			srcDir "../TomsPeripherals/src/shared/resources"
 		}
 	}
 }

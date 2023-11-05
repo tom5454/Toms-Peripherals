@@ -1,7 +1,12 @@
 package com.tom.peripherals.block;
 
+import java.util.List;
+
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.DyeColor;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -18,6 +23,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 import com.tom.peripherals.Content;
+import com.tom.peripherals.client.ClientUtil;
 import com.tom.peripherals.util.TickerUtil;
 
 import dan200.computercraft.shared.peripheral.modem.ModemShapes;
@@ -53,5 +59,10 @@ public class WatchDogTimerBlock extends Block implements EntityBlock {
 	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level world, BlockState state,
 			BlockEntityType<T> type) {
 		return TickerUtil.createTicker(world, false, true);
+	}
+
+	@Override
+	public void appendHoverText(ItemStack stack, BlockGetter world, List<Component> tooltip, TooltipFlag p_49819_) {
+		ClientUtil.tooltip("wdt", tooltip);
 	}
 }

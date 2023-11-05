@@ -1,12 +1,12 @@
 {
     "parent": "block/cube",
     "textures": {
-        "up": "toms_peripherals:block/monitor_side",
-        "down": "toms_peripherals:block/monitor_side",
+        "up": "toms_peripherals:block/monitor_top",
+        "down": "toms_peripherals:block/monitor_bottom",
         "north": "toms_peripherals:block/monitor_front",
-        "east": "toms_peripherals:block/monitor_side",
-        "south": "toms_peripherals:block/monitor_side",
-        "west": "toms_peripherals:block/monitor_side",
+        "east": "toms_peripherals:block/monitor_side2",
+        "south": "toms_peripherals:block/monitor_back",
+        "west": "toms_peripherals:block/monitor_side3",
         "particle": "toms_peripherals:block/monitor_side"
     }
 }

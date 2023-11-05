@@ -14,9 +14,9 @@ import org.lwjgl.system.MemoryUtil;
 import com.mojang.blaze3d.platform.NativeImage;
 import com.mojang.blaze3d.platform.TextureUtil;
 
-import com.tom.peripherals.screen.gpu.GLConstants.Vec2i;
+import com.tom.peripherals.math.Vec2i;
 
-public class NativeImageIO implements ImageIO {
+public class NativeImageIO implements IImageIO {
 
 	@Override
 	public Image read(InputStream f) throws IOException {

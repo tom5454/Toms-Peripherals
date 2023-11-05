@@ -15,5 +15,11 @@
 	"label.toms_peripherals.wdt.timer": "Elapsed since reset: %s",
 	
 	"config.toms_peripherals.maxScreenSize": "Max Screen Size",
-	"config.toms_peripherals.maxVRAMSize": "Maximum VRAM Size in GPU peripherals"
+	"config.toms_peripherals.maxVRAMSize": "Maximum VRAM Size in GPU peripherals",
+	
+	"tooltip.toms_peripherals.hold_shift_for_info": "Hold SHIFT for more info.",
+	"tooltip.toms_peripherals.monitor": "The GPU block must touch the bottom left monitor block. The arrows point away from this block.",
+	"tooltip.toms_peripherals.gpu": "Drives the monitor blocks and performs image manipulation functions. See the wiki for the list of functions.",
+	"tooltip.toms_peripherals.wdt": "Restarts the attached computer if the running program crashes or times out for some reason. See the wiki for more info.",
+	"tooltip.toms_peripherals.redstone_port": "More redstone sides for your computer"
 }
