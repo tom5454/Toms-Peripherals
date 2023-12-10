@@ -11,6 +11,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
@@ -31,6 +32,7 @@ public class Platform {
 		ITEMS.register();
 		BLOCKS.register();
 		BLOCK_ENTITY.register();
+		TAB.register(FMLJavaModLoadingContext.get().getModEventBus());
 	}
 
 	public static MinecraftServer getServer() {
