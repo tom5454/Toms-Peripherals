@@ -503,9 +503,9 @@ public class BaseGPU extends TMLuaObject {
 		int cH = ctx.getHeight();
 		int iW = img.getWidth();
 		int iH = img.getHeight();
-		for (int x = Math.min(0, -xS);x<iW && x+xS < cW;x++) {
-			for (int y = Math.min(0, -yS);y<iH && y+yS < cH;y++) {
-				ctx.set(x, y, img.getRGB(x, y));
+		for (int x = Math.max(0, -xS);x<iW && x+xS < cW;x++) {
+			for (int y = Math.max(0, -yS);y<iH && y+yS < cH;y++) {
+				ctx.set(x + xS, y + yS, img.getRGB(x, y));
 			}
 		}
 		return true;

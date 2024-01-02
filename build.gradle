@@ -4,7 +4,7 @@ plugins {
 }
 
 version = project.mod_version
-group = 'com.tom.peripherals' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+group = 'com.tom5454.peripherals' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'TomsPeripherals-API'
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
