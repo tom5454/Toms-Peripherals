@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+  	{
+  		"item": "computercraft:wireless_modem_normal"
+  	},
+  	{
+  		"tag": "minecraft:buttons"
+  	}
+  ],
+  "result": {
+    "item": "toms_peripherals:keyboard_dongle",
+    "count": 1
+  }
+}

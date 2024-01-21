@@ -5,6 +5,7 @@ import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -19,6 +20,7 @@ public class Platform {
 	public static final GameRegistry<Item> ITEMS = new GameRegistry<>(Registry.ITEM);
 	public static final GameRegistry<Block> BLOCKS = new GameRegistry<>(Registry.BLOCK);
 	public static final GameRegistryBE BLOCK_ENTITY = new GameRegistryBE(Registry.BLOCK_ENTITY_TYPE);
+	public static final GameRegistry<MenuType<?>> MENU_TYPE = new GameRegistry<>(Registry.MENU);
 	private static MinecraftServer serverInst;
 
 	public static final CreativeModeTab MOD_TAB = FabricItemGroupBuilder.build(new ResourceLocation(PeripheralsMod.ID, "tab"), () -> new ItemStack(Content.gpu.get()));

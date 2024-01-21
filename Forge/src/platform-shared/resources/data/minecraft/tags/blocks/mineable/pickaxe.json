@@ -4,6 +4,8 @@
 	"toms_peripherals:gpu",
 	"toms_peripherals:monitor",
 	"toms_peripherals:redstone_port",
-	"toms_peripherals:wdt"
+	"toms_peripherals:wdt",
+	"toms_peripherals:keyboard",
+	"toms_peripherals:keyboard_dongle"
   ]
 }

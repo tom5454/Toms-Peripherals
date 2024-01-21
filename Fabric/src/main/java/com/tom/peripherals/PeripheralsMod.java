@@ -10,6 +10,7 @@ import net.minecraftforge.fml.config.ModConfig;
 
 import com.mojang.logging.LogUtils;
 
+import com.tom.peripherals.network.Network;
 import com.tom.peripherals.platform.ModProvider;
 import com.tom.peripherals.platform.Platform;
 
@@ -40,6 +41,7 @@ public class PeripheralsMod implements ModInitializer {
 				Config.load(c);
 			}
 		});
+		Network.initCommon();
 	}
 
 }
