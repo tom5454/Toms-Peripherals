@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+  	"ab ",
+    " r ",
+    "  c"
+  ],
+  "key": {
+  	"b": {
+      "tag": "minecraft:buttons"
+    },
+    "r": {
+      "tag": "c:redstone_dusts"
+    },
+    "c": {
+      "tag": "c:copper_ingots"
+    },
+	"a": {
+      "item": "minecraft:amethyst_shard"
+    }
+  },
+  "result": {
+    "item": "toms_peripherals:laser_pointer"
+  }
+}

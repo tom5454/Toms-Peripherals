@@ -12,6 +12,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 
+import com.tom.peripherals.math.Vec2i;
 import com.tom.peripherals.screen.TextureCache;
 
 public class MonitorBlockEntity extends BlockEntity {
@@ -66,23 +67,28 @@ public class MonitorBlockEntity extends BlockEntity {
 		if (getDirection() == side && gpuPos != null) {
 			BlockEntity tile = level.getBlockEntity(gpuPos);
 			if (tile != null && tile instanceof GPUBlockEntity gpu) {
-				int xP;
-				int yP;
-				if (side.getAxis() != Axis.Y) {
-					double yPos = 1F - y;
-					double xPos = (Math.abs(side.getStepZ()) * x + Math.abs(side.getStepX()) * z);
-					if ((side.getAxisDirection() == AxisDirection.NEGATIVE) != (side.getAxis() == Axis.X))
-						xPos = 1F - xPos;
-					xP = Mth.floor(xPos * width);
-					yP = Mth.floor(yPos * width);
-				} else {
-					double yPos = side == Direction.DOWN ? (1F - z) : z;
-					xP = Mth.floor(x * width);
-					yP = Mth.floor(yPos * width);
-				}
-				gpu.monitorClick(worldPosition, xP, yP, sneak);
+				Vec2i c = getMonitorPixel(side, x, y, z);
+				gpu.monitorClick(this, c.x, c.y, sneak);
 			}
 		}
+	}
+
+	public Vec2i getMonitorPixel(Direction side, double x, double y, double z) {
+		int xP;
+		int yP;
+		if (side.getAxis() != Axis.Y) {
+			double yPos = 1F - y;
+			double xPos = (Math.abs(side.getStepZ()) * x + Math.abs(side.getStepX()) * z);
+			if ((side.getAxisDirection() == AxisDirection.NEGATIVE) != (side.getAxis() == Axis.X))
+				xPos = 1F - xPos;
+			xP = Mth.floor(xPos * width);
+			yP = Mth.floor(yPos * width);
+		} else {
+			double yPos = side == Direction.DOWN ? (1F - z) : z;
+			xP = Mth.floor(x * width);
+			yP = Mth.floor(yPos * width);
+		}
+		return new Vec2i(xP, yP);
 	}
 
 	@Override
@@ -113,5 +119,13 @@ public class MonitorBlockEntity extends BlockEntity {
 		super.setRemoved();
 		if (clientCache != null)clientCache.cleanup();
 		clientCache = null;
+	}
+
+	public void event(String ev, int x, int y, Integer param) {
+		if (gpuPos == null)return;
+		BlockEntity tile = level.getBlockEntity(gpuPos);
+		if (tile != null && tile instanceof GPUBlockEntity gpu) {
+			gpu.monitorEvent(this, ev, x, y, param);
+		}
 	}
 }

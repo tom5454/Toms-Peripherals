@@ -1,0 +1,7 @@
+{
+  "parent": "computercraft:block/modem",
+  "textures": {
+	  "front": "toms_peripherals:block/keyboard_dongle", 
+	  "back": "computercraft:block/modem_back"
+  }
+}

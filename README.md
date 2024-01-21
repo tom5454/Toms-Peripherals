@@ -10,6 +10,11 @@ See the [example code repo](https://github.com/tom5454/Toms-Peripherals/tree/api
 Up to 64x64 resolution per monitor block.
 See the [wiki](https://github.com/tom5454/Toms-Peripherals/wiki) for all available functions.
 
+### Keyboard
+![Keyboard with Advanced Terminal](https://cdn.modrinth.com/data/ljgxd2P8/images/addc7a896fc7073f297bc1f9fb17aa5ca31d8080.png)  
+Use your computer with a bigger monitor  
+Support mouse input on both Advanced Monitors and the Bitmap Monitor blocks from this mod.
+
 ### Redstone Port
 More redstone sides for your computer
 

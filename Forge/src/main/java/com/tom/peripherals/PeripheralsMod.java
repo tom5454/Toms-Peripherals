@@ -15,6 +15,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import com.mojang.logging.LogUtils;
 
 import com.tom.peripherals.gpu.font.FontManager;
+import com.tom.peripherals.network.Network;
 import com.tom.peripherals.platform.Platform;
 import com.tom.peripherals.top.TheOneProbeHandler;
 import com.tom.peripherals.util.ImageIO;
@@ -43,6 +44,7 @@ public class PeripheralsMod {
 
 	private void setup(FMLCommonSetupEvent e) {
 		FontManager.init();
+		Network.init();
 	}
 
 	public void enqueueIMC(InterModEnqueueEvent e) {

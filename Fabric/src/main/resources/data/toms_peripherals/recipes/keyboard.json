@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+  	"bbb",
+    "bbb",
+    "srs"
+  ],
+  "key": {
+  	"b": {
+      "tag": "minecraft:buttons"
+    },
+    "r": {
+      "tag": "c:redstone_dusts"
+    },
+    "s": {
+      "tag": "minecraft:stone_crafting_materials"
+    }
+  },
+  "result": {
+    "item": "toms_peripherals:keyboard"
+  }
+}
