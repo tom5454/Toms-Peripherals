@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+  	{
+  		"item": "toms_peripherals:keyboard"
+  	},
+  	{
+  		"item": "minecraft:redstone_torch"
+  	}
+  ],
+  "result": {
+    "item": "toms_peripherals:portable_keyboard",
+    "count": 1
+  }
+}

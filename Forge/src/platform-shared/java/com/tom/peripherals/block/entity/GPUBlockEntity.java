@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Stack;
+import java.util.function.Consumer;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -22,6 +23,7 @@ import com.tom.peripherals.gpu.BaseGPU.GPUContext;
 import com.tom.peripherals.gpu.GPUImpl;
 import com.tom.peripherals.gpu.VRAM;
 import com.tom.peripherals.gpu.VRAM.VRAMObject;
+import com.tom.peripherals.math.Vec2i;
 import com.tom.peripherals.platform.AbstractPeripheralBlockEntity;
 import com.tom.peripherals.platform.Platform;
 import com.tom.peripherals.util.ParamCheck;
@@ -228,24 +230,29 @@ public class GPUBlockEntity extends AbstractPeripheralBlockEntity {
 			return ret;
 		}
 
-		public void monitorClick(BlockPos pos, int x, int y, boolean soft) {
+		private void monitorPos(MonitorBlockEntity pos, int x, int y, Consumer<Vec2i> v) {
 			int index1 = 0;
 			for (List<MonitorBlockEntity> cMonList : getMonitors(false)) {
 				int index2 = cMonList.size() - 1;
 				for (MonitorBlockEntity mon : cMonList) {
-					if (mon != null) {
-						BlockPos monp = mon.getBlockPos();
-						if (monp.equals(pos)) {
-							int xP = x + (this.size * index1);
-							int yP = y + (this.size * index2);
-							this.queueEvent("tm_monitor_touch", new Object[]{xP + 1, yP + 1, soft});
-							break;
-						}
+					if (mon != null && mon == pos) {
+						int xP = x + (this.size * index1);
+						int yP = y + (this.size * index2);
+						v.accept(new Vec2i(xP + 1, yP + 1));
+						return;
 					}
 					index2--;
 				}
 				index1++;
 			}
+		}
+
+		public void monitorClick(MonitorBlockEntity pos, int x, int y, boolean soft) {
+			monitorPos(pos, x, y, p -> this.queueEvent("tm_monitor_touch", new Object[]{p.x, p.y, soft}));
+		}
+
+		public void monitorEvent(MonitorBlockEntity pos, String ev, int x, int y, Integer param) {
+			monitorPos(pos, x, y, p -> this.queueEvent("tm_monitor_" + ev, new Object[] {p.x, p.y, param}));
 		}
 
 		public void queueEvent(String event, Object[] args) {
@@ -330,7 +337,11 @@ public class GPUBlockEntity extends AbstractPeripheralBlockEntity {
 		return peripheral;
 	}
 
-	public void monitorClick(BlockPos pos, int x, int y, boolean soft) {
-		getPeripheral().monitorClick(pos, x, y, soft);
+	public void monitorClick(MonitorBlockEntity be, int x, int y, boolean soft) {
+		getPeripheral().monitorClick(be, x, y, soft);
+	}
+
+	public void monitorEvent(MonitorBlockEntity be, String ev, int x, int y, Integer param) {
+		getPeripheral().monitorEvent(be, ev, x, y, param);
 	}
 }

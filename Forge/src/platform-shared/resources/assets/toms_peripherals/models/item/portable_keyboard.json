@@ -1,0 +1,7 @@
+{
+	"parent": "toms_peripherals:item/portable_keyboard_off",
+	"overrides": [
+		{ "predicate": { "toms_peripherals:portable_keyboard": 0 }, "model": "toms_peripherals:item/portable_keyboard_off" },
+        { "predicate": { "toms_peripherals:portable_keyboard": 1 }, "model": "toms_peripherals:item/portable_keyboard_on" }
+	]
+}
