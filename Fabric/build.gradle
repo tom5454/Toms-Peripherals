@@ -1,5 +1,5 @@
 plugins {
-	id 'fabric-loom' version '1.2-SNAPSHOT'
+	id 'fabric-loom' version '1.5-SNAPSHOT'
 	id 'maven-publish'
 }
 
@@ -52,7 +52,7 @@ dependencies {
 	// Fabric API. This is technically optional, but you probably want it anyway.
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 	
-	modImplementation("com.terraformersmc:modmenu:7.1.0") {
+	modImplementation("com.terraformersmc:modmenu:9.0.0") {
         exclude(group: "net.fabricmc.fabric-api")
     }
     
@@ -62,12 +62,12 @@ dependencies {
     
     modImplementation "me.shedaniel.cloth.api:cloth-utils-v1:2.0.54"
     
-    modCompileOnly("cc.tweaked:cc-tweaked-1.20.1-fabric-api:1.108.4")
-    modImplementation("cc.tweaked:cc-tweaked-1.20.1-fabric:1.108.4")
+    modCompileOnly("cc.tweaked:cc-tweaked-1.20.4-fabric-api:1.110.2")
+    modImplementation("cc.tweaked:cc-tweaked-1.20.4-fabric:1.110.2")
     
 	implementation "com.electronwill.night-config:core:3.6.3"
     implementation "com.electronwill.night-config:toml:3.6.3"
-	modImplementation "curse.maven:forge-config-api-port-fabric-547434:4583000"
+	modImplementation "curse.maven:forge-config-api-port-fabric-547434:5051714"
 }
 
 loom {
@@ -77,11 +77,11 @@ loom {
 sourceSets {
 	main {
 		java {
-			srcDir "../TomsPeripherals-120/src/platform-shared/java"
+			srcDir "../TomsPeripherals-1204/src/platform-shared/java"
 			srcDir "../TomsPeripherals/src/shared/java"
 		}
 		resources {
-			srcDir "../TomsPeripherals-120/src/platform-shared/resources"
+			srcDir "../TomsPeripherals-1204/src/platform-shared/resources"
 			srcDir "../TomsPeripherals/src/shared/resources"
 		}
 	}

@@ -26,7 +26,7 @@ public class PeripheralsModClient implements ClientModInitializer {
 		ImageIO.handler = new NativeImageIO();
 
 		ClientPlayNetworking.registerGlobalReceiver(Network.DATA_S2C, (mc, h, buf, rp) -> {
-			CompoundTag tag = buf.readAnySizeNbt();
+			CompoundTag tag = buf.readNbt();
 			mc.submit(() -> {
 				if(mc.screen instanceof IDataReceiver) {
 					((IDataReceiver)mc.screen).receive(tag);
