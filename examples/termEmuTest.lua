@@ -14,6 +14,7 @@ local function runProgram()
 end
 
 local emu = require "term_emu"
+local font = require "cc_term_font"
 local gpu = peripheral.wrap(gpuID)
 gpu.refreshSize()
 gpu.setSize(64)
@@ -23,12 +24,13 @@ local function doSync()
 end
 sleep(0.25)-- Wait for refreshSize
 local sx, sy = gpu.getSize()
-local tw = math.floor(sx / 8 / scale)
-local th = math.floor(sy / 10 / scale)
+local tw = math.floor(sx / 6 / scale)
+local th = math.floor(sy / 9 / scale)
 if tw < 5 or th < 3 then
     error("Your current monitor is too small for terminal emulation with scale: "..scale)
 end
-local rd = emu.create(gpu, doSync, tw, th, true, scale)
+font.upload(gpu)
+local rd = emu.create(gpu, doSync, tw, th, true, scale, "unicode_page_e0")
 rd.auto_update()
 
 -- Updates the blinking cursor

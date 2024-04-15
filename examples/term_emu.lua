@@ -60,7 +60,8 @@ end
 -- @param height terminal height in characters (default 16)
 -- @param colorMode bool isColor or palette table (see: colorTable above)
 -- @param scale the terminal characters
-function TerminalEmu.create(gpu, syncFun, width, height, colorMode, scale)
+-- @param use custom font
+function TerminalEmu.create(gpu, syncFun, width, height, colorMode, scale, useCustomFont)
   colorMode = colorMode or true --full color
   scale = scale or 1
 
@@ -68,16 +69,29 @@ function TerminalEmu.create(gpu, syncFun, width, height, colorMode, scale)
 
   local palette = {}
 
-  local charW = scale * 8
+  local charW = scale * 6
   local charWh = charW / 2 + 1
-  local charH = scale * 10
+  local charH = scale * 9
 
-  local function set_character(term_x, term_y, fg, bg, char)
+  local function set_character_default(term_x, term_y, fg, bg, char)
     local s = gpu.getTextLength(char)
     gpu.filledRectangle((term_x - 1) * charW + 1, (term_y - 1) * charH + 1, charW, charH, palette[bg])
     if char ~= " " then
       gpu.drawText((term_x - 1) * charW + charWh - (s / 2), (term_y - 1) * charH + 1, char, palette[fg], -1, scale)
     end
+  end
+
+  local function set_character_font(term_x, term_y, fg, bg, char)
+    gpu.filledRectangle((term_x - 1) * charW + 1, (term_y - 1) * charH + 1, charW, charH, palette[bg])
+    if char ~= " " then
+      gpu.drawChar((term_x - 1) * charW + 1, (term_y - 1) * charH + 1, char:byte(), palette[fg], -1, scale)
+    end
+  end
+
+  local set_character = set_character_default
+  if useCustomFont then
+    set_character = set_character_font
+    gpu.setFont(useCustomFont)
   end
   
   local function clear_screen(bg)
@@ -556,7 +570,7 @@ function TerminalEmu.create(gpu, syncFun, width, height, colorMode, scale)
       if lastCurOn and (switchVis or lastCurX ~= cursor_x or lastCurY ~= cursor_y) then
         eraseCursor()
         --(term_x - 1) * 8 + 1, (term_y - 1) * 10 + 1, 8, 10
-        gpu.filledRectangle((cursor_x - 1) * charW + 2, (cursor_y - 1) * charH + charW, scale * 6, scale, palette[inverted_colors[text_color]])
+        gpu.filledRectangle((cursor_x - 1) * charW + 1, (cursor_y - 1) * charH + scale * 8, scale * 5, scale, palette[inverted_colors[text_color]])
         lastCurX = cursor_x
         lastCurY = cursor_y
         syncFun()

@@ -404,7 +404,7 @@ public class BaseGPU extends TMLuaObject {
 			String c = ParamCheck.getString(a, 0);
 			if (c.length() != 1) throw new LuaException("Bad Argument #1 a sigle character expected");
 			int[] d = ParamCheck.ints(a, 1).toArray();
-			if (d.length != 16)
+			if (d.length != 17)
 				throw new LuaException("Invalid arguments, expected (string char, number width, 16 x number char_data)");
 			return selectedFont.addChar(c, d);
 		} else throw new LuaException("Invalid arguments, expected (string char, number width, 16 x number char_data)");
