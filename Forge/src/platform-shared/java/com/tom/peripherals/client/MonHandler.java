@@ -24,7 +24,6 @@ public class MonHandler implements MonitorHandler {
 
 	@Override
 	public void mouseClick(int btn) {
-		System.out.println("Click");
 		sendEvent("mouse_click", lookingAt.getBlockPos(), pos, btn);
 		lastBtn = btn;
 
@@ -32,7 +31,6 @@ public class MonHandler implements MonitorHandler {
 
 	@Override
 	public void mouseRelease(int btn) {
-		System.out.println("Rel");
 		if (this.lastBtn == btn) {
 			sendEvent("mouse_up", lookingAt.getBlockPos(), pos, btn);
 			this.lastBtn = -1;
