@@ -5,11 +5,13 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Stack;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Consumer;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Direction.Axis;
+import net.minecraft.server.TickTask;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -38,6 +40,7 @@ public class GPUBlockEntity extends AbstractPeripheralBlockEntity {
 	private class GPUPeripheral implements ITMPeripheral, GPUContext, VRAMObject {
 		private List<List<MonitorBlockEntity>> monitors;
 		private List<IComputer> computers = new ArrayList<>();
+		private int syncState = 0;
 
 		private int maxX = 0;
 		private int maxY = 0;
@@ -93,21 +96,46 @@ public class GPUBlockEntity extends AbstractPeripheralBlockEntity {
 
 		@Override
 		public void sync() {
-			Platform.getServer().execute(() -> {
-				int index1 = 0;
-				for (List<MonitorBlockEntity> cMonList : getMonitors(false)) {
-					int index2 = cMonList.size() - 1;
-					for (MonitorBlockEntity mon : cMonList) {
-						var s = mon.screen;
-						mon.screen = separateIntArray(screen, index1, index2, size);
-						mon.width = size;
-						if (!Arrays.equals(s, mon.screen))
-							mon.sync();
-						index2--;
-					}
-					index1++;
+			boolean exec = false;
+			synchronized (this) {
+				if (syncState == 0) {
+					syncState = 1;
+					exec = true;
+				} else {
+					syncState = 2;
 				}
-			});
+			}
+			if (exec) {
+				Platform.getServer().execute(this::sync0);
+			}
+		}
+
+		private void sync0() {
+			int index1 = 0;
+			for (List<MonitorBlockEntity> cMonList : getMonitors(false)) {
+				int index2 = cMonList.size() - 1;
+				for (MonitorBlockEntity mon : cMonList) {
+					var s = mon.screen;
+					mon.screen = separateIntArray(screen, index1, index2, size);
+					mon.width = size;
+					if (!Arrays.equals(s, mon.screen))
+						mon.sync();
+					index2--;
+				}
+				index1++;
+			}
+			boolean exec = false;
+			synchronized (this) {
+				if (syncState != 1) {
+					syncState = 1;
+					exec = true;
+				} else {
+					syncState = 0;
+				}
+			}
+			if (exec) {
+				Platform.getServer().tell(new TickTask(Platform.getServer().getTickCount() + 1, this::sync0));
+			}
 		}
 
 		public MonitorBlockEntity findMonitor() {
@@ -296,6 +324,7 @@ public class GPUBlockEntity extends AbstractPeripheralBlockEntity {
 
 	public static class GPUExt extends GPUImpl {
 		private GPUPeripheral gpu;
+		private AtomicBoolean refreshSizeRunning = new AtomicBoolean(false);
 
 		public GPUExt(GPUPeripheral ctx) {
 			super(ctx);
@@ -319,9 +348,15 @@ public class GPUBlockEntity extends AbstractPeripheralBlockEntity {
 
 		@LuaMethod
 		public void refreshSize() {
-			Platform.getServer().execute(() -> {
-				gpu.getMonitors(true);
-			});
+			if (refreshSizeRunning.compareAndSet(false, true)) {
+				Platform.getServer().execute(() -> {
+					try {
+						gpu.getMonitors(true);
+					} finally {
+						refreshSizeRunning.set(false);
+					}
+				});
+			}
 		}
 
 		@Override

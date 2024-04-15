@@ -1,6 +1,8 @@
 package com.tom.peripherals;
 
 import net.minecraft.client.gui.screens.MenuScreens;
+import net.minecraft.client.renderer.ItemBlockRenderTypes;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.resources.ResourceLocation;
@@ -17,5 +19,7 @@ public class Client {
 		ItemProperties.register(Content.portableKeyboard.get(), new ResourceLocation("toms_peripherals:portable_keyboard"), (stack, level, player, p_174643_) -> {
 			return stack.hasTag() && stack.getTag().getBoolean("inUse") ? 1F : 0F;
 		});
+
+		ItemBlockRenderTypes.setRenderLayer(Content.keyboard.get(), RenderType.cutout());
 	}
 }
