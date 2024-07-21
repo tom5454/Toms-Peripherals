@@ -3,6 +3,7 @@ package com.tom.peripherals.platform;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.MinecraftServer;
@@ -27,6 +28,7 @@ public class Platform {
 	public static final GameRegistryBE BLOCK_ENTITY = new GameRegistryBE();
 	public static final DeferredRegister<CreativeModeTab> TAB = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, PeripheralsMod.ID);
 	public static final GameRegistry<MenuType<?>> MENU_TYPE = new GameRegistry<>(Registries.MENU);
+	public static final GameRegistry<DataComponentType<?>> DATA_COMPONENT_TYPES = new GameRegistry<>(Registries.DATA_COMPONENT_TYPE);
 
 	public static void register(IEventBus bus) {
 		ITEMS.register(bus);
@@ -34,6 +36,7 @@ public class Platform {
 		BLOCK_ENTITY.register(bus);
 		MENU_TYPE.register(bus);
 		TAB.register(bus);
+		DATA_COMPONENT_TYPES.register(bus);
 	}
 
 	public static MinecraftServer getServer() {

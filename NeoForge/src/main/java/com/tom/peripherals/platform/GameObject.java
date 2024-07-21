@@ -3,7 +3,6 @@ package com.tom.peripherals.platform;
 import java.util.Arrays;
 import java.util.function.Supplier;
 
-import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
@@ -11,7 +10,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.entity.BlockEntityType.BlockEntitySupplier;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -56,17 +55,10 @@ public class GameObject<T> {
 		}
 
 		@SuppressWarnings("unchecked")
-		public <BE extends BlockEntity, I extends BlockEntityType<BE>> GameObjectBlockEntity<BE> registerBE(String name, BlockEntityFactory<BE> sup, GameObject<? extends Block>... blocks) {
+		public <BE extends BlockEntity, I extends BlockEntityType<BE>> GameObjectBlockEntity<BE> registerBE(String name, BlockEntitySupplier<BE> sup, GameObject<? extends Block>... blocks) {
 			return new GameObjectBlockEntity<>(handle.register(name, () -> {
-				BlockEntityType<BE>[] type = new BlockEntityType[1];
-				Block[] bl = Arrays.stream(blocks).map(GameObject::get).toArray(Block[]::new);
-				type[0] = BlockEntityType.Builder.<BE>of((a, b) -> sup.create(type[0], a, b), bl).build(null);
-				return type[0];
+				return BlockEntityType.Builder.<BE>of(sup, Arrays.stream(blocks).map(GameObject::get).toArray(Block[]::new)).build(null);
 			}));
-		}
-
-		public static interface BlockEntityFactory<T extends BlockEntity> {
-			T create(BlockEntityType<T> type, BlockPos pos, BlockState state);
 		}
 	}
 

@@ -25,7 +25,7 @@ public class LaserPointerItem extends Item {
 			BlockHitResult lookingAt = (BlockHitResult) player.pick(32, 0f, true);
 			BlockState state = world.getBlockState(lookingAt.getBlockPos());
 			if (state.getBlock() instanceof MonitorBlock || world.getBlockEntity(lookingAt.getBlockPos()) instanceof MonitorBlockEntity) {
-				state.use(world, player, InteractionHand.MAIN_HAND, lookingAt);
+				state.useWithoutItem(world, player, lookingAt);
 			}
 		}
 		return InteractionResultHolder.consume(player.getItemInHand(hand));

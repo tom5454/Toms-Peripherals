@@ -1,10 +1,14 @@
 {
 	"homepage": "https://www.curseforge.com/minecraft/mc-mods/toms-peripherals",
 	"promos": {
+		"1.21-latest": "1.2.2",
 		"1.20.4-latest": "1.2.1",
 		"1.20.1-latest": "1.2.1",
 		"1.19.2-latest": "1.2.1",
 		"1.18.2-latest": "1.2.1"
+	},
+	"1.21": {
+		"1.2.2": "1.21 port"
 	},
 	"1.20.4": {
 		"1.2.1": "1.20.4 port"

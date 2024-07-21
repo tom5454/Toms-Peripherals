@@ -1,28 +1,25 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-  	"sms",
-    "cCc",
-    "sRs"
+  	"sRs",
+    "RcR",
+    "sms"
   ],
   "key": {
   	"s": {
-      "tag": "forge:stone"
+      "item": "minecraft:stone"
     },
     "c": {
       "item": "minecraft:comparator"
     },
-    "C": {
-      "item": "minecraft:clock"
-    },
     "R": {
-      "tag": "forge:dusts/redstone"
+      "tag": "c:dusts/redstone"
     },
     "m": {
       "item": "computercraft:wired_modem"
     }
   },
   "result": {
-    "item": "toms_peripherals:wdt"
+    "id": "toms_peripherals:redstone_port"
   }
 }

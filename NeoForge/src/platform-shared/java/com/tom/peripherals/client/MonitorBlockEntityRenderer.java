@@ -1,8 +1,6 @@
 package com.tom.peripherals.client;
 
-import org.joml.Matrix3f;
 import org.joml.Matrix4f;
-import org.joml.Vector3f;
 
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -12,6 +10,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.PoseStack.Pose;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
 
@@ -39,21 +38,19 @@ public class MonitorBlockEntityRenderer implements BlockEntityRenderer<MonitorBl
 			stack.mulPose(Axis.XP.rotationDegrees(-facing.getStepY() * 90));
 		}
 		stack.translate(-0.5d, -0.5d, -0.5d);
+		Pose pose = stack.last();
 		Matrix4f mat = stack.last().pose();
-		Matrix3f nor = stack.last().normal();
-		Vector3f n = new Vector3f(facing.getStepX(), facing.getStepY(), facing.getStepZ());
-		n.mul(nor);
 		VertexConsumer buf = buffer.getBuffer(RenderType.entityTranslucent(tex));
 
 		float z = 1.001F;
-		buf.vertex(mat, 1, 1, z).color(1F, 1F, 1F, 1F).uv(1, 0).overlayCoords(pPackedOverlay).uv2(pPackedLight)
-		.normal(nor, 0.0F, 0.0F, 1.0F).endVertex();
-		buf.vertex(mat, 0, 1, z).color(1F, 1F, 1F, 1F).uv(0, 0).overlayCoords(pPackedOverlay).uv2(pPackedLight)
-		.normal(nor, 0.0F, 0.0F, 1.0F).endVertex();
-		buf.vertex(mat, 0, 0, z).color(1F, 1F, 1F, 1F).uv(0, 1).overlayCoords(pPackedOverlay).uv2(pPackedLight)
-		.normal(nor, 0.0F, 0.0F, 1.0F).endVertex();
-		buf.vertex(mat, 1, 0, z).color(1F, 1F, 1F, 1F).uv(1, 1).overlayCoords(pPackedOverlay).uv2(pPackedLight)
-		.normal(nor, 0.0F, 0.0F, 1.0F).endVertex();
+		buf.addVertex(mat, 1, 1, z).setColor(1F, 1F, 1F, 1F).setUv(1, 0).setOverlay(pPackedOverlay).setLight(pPackedLight)
+		.setNormal(pose, 0.0F, 0.0F, 1.0F);
+		buf.addVertex(mat, 0, 1, z).setColor(1F, 1F, 1F, 1F).setUv(0, 0).setOverlay(pPackedOverlay).setLight(pPackedLight)
+		.setNormal(pose, 0.0F, 0.0F, 1.0F);
+		buf.addVertex(mat, 0, 0, z).setColor(1F, 1F, 1F, 1F).setUv(0, 1).setOverlay(pPackedOverlay).setLight(pPackedLight)
+		.setNormal(pose, 0.0F, 0.0F, 1.0F);
+		buf.addVertex(mat, 1, 0, z).setColor(1F, 1F, 1F, 1F).setUv(1, 1).setOverlay(pPackedOverlay).setLight(pPackedLight)
+		.setNormal(pose, 0.0F, 0.0F, 1.0F);
 		stack.popPose();
 	}
 

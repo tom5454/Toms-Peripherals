@@ -4,14 +4,16 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Direction.Axis;
 import net.minecraft.core.Direction.AxisDirection;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.util.Mth;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 
+import com.tom.peripherals.Content;
 import com.tom.peripherals.math.Vec2i;
 import com.tom.peripherals.screen.TextureCache;
 
@@ -21,8 +23,8 @@ public class MonitorBlockEntity extends BlockEntity {
 	public int[] screen = new int[0];
 	public int width;
 
-	public MonitorBlockEntity(BlockEntityType<?> p_155228_, BlockPos p_155229_, BlockState p_155230_) {
-		super(p_155228_, p_155229_, p_155230_);
+	public MonitorBlockEntity(BlockPos p_155229_, BlockState p_155230_) {
+		super(Content.monitorBE.get(), p_155229_, p_155230_);
 	}
 
 	public Direction getDirection() {
@@ -92,7 +94,7 @@ public class MonitorBlockEntity extends BlockEntity {
 	}
 
 	@Override
-	public CompoundTag getUpdateTag() {
+	public CompoundTag getUpdateTag(HolderLookup.Provider p_323910_) {
 		CompoundTag tag = new CompoundTag();
 		tag.putIntArray("s", screen);
 		tag.putShort("w", (short) width);
@@ -105,8 +107,8 @@ public class MonitorBlockEntity extends BlockEntity {
 	}
 
 	@Override
-	public void load(CompoundTag compoundTag) {
-		super.load(compoundTag);
+	protected void loadAdditional(CompoundTag compoundTag, Provider p_338445_) {
+		super.loadAdditional(compoundTag, p_338445_);
 		if (compoundTag.contains("s")) {
 			screen = compoundTag.getIntArray("s");
 			width = compoundTag.getShort("w");

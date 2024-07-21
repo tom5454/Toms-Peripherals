@@ -41,7 +41,7 @@ description='''
     # Does this dependency have to exist - if not, ordering below must be specified
     type="required"
     # The version range of the dependency
-    versionRange="[20.4.70-beta,)" #mandatory
+    versionRange="[21.0.0-beta,)" #mandatory
     # An ordering relationship for the dependency - BEFORE or AFTER required if the relationship is not mandatory
     ordering="NONE"
     # Side this dependency is applied on - BOTH, CLIENT or SERVER
@@ -50,7 +50,7 @@ description='''
 [[dependencies.toms_peripherals]]
     modId="minecraft"
     type="required"
-    versionRange="[1.20.4,)"
+    versionRange="[1.21,)"
     ordering="NONE"
     side="BOTH"
 [[dependencies.toms_peripherals]]

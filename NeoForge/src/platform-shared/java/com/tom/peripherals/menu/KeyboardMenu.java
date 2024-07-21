@@ -3,7 +3,6 @@ package com.tom.peripherals.menu;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -112,7 +111,7 @@ public class KeyboardMenu extends AbstractContainerMenu implements IDataReceiver
 			if (te.getLevel().isLoaded(pos) && te.getBlockPos().distSqr(pos) < 64 * 64) {
 				BlockState b = te.getLevel().getBlockState(pos);
 				if (b.getBlock() instanceof MonitorBlock) {
-					b.use(te.getLevel(), inv.player, InteractionHand.MAIN_HAND, hit);
+					b.useWithoutItem(te.getLevel(), inv.player, hit);
 				}
 			}
 		}

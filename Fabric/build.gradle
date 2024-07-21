@@ -1,5 +1,5 @@
 plugins {
-	id 'fabric-loom' version '1.5-SNAPSHOT'
+	id 'fabric-loom' version '1.7-SNAPSHOT'
 	id 'maven-publish'
 }
 
@@ -36,8 +36,8 @@ maven {
 	}
 }
 
-sourceCompatibility = JavaVersion.VERSION_17
-targetCompatibility = JavaVersion.VERSION_17
+sourceCompatibility = JavaVersion.VERSION_21
+targetCompatibility = JavaVersion.VERSION_21
 
 archivesBaseName = project.archives_base_name
 version = project.mod_version
@@ -52,7 +52,7 @@ dependencies {
 	// Fabric API. This is technically optional, but you probably want it anyway.
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 	
-	modImplementation("com.terraformersmc:modmenu:9.0.0") {
+	modImplementation("com.terraformersmc:modmenu:11.0.1") {
         exclude(group: "net.fabricmc.fabric-api")
     }
     
@@ -62,12 +62,18 @@ dependencies {
     
     modImplementation "me.shedaniel.cloth.api:cloth-utils-v1:2.0.54"
     
-    modCompileOnly("cc.tweaked:cc-tweaked-1.20.4-fabric-api:1.110.2")
-    modImplementation("cc.tweaked:cc-tweaked-1.20.4-fabric:1.110.2")
+    modCompileOnly("cc.tweaked:cc-tweaked-1.21-fabric-api:1.111.0")
+    modImplementation("cc.tweaked:cc-tweaked-1.21-fabric:1.111.0")
     
-	implementation "com.electronwill.night-config:core:3.6.3"
-    implementation "com.electronwill.night-config:toml:3.6.3"
-	modImplementation "curse.maven:forge-config-api-port-fabric-547434:5051714"
+	implementation "com.electronwill.night-config:core:3.8.0"
+    implementation "com.electronwill.night-config:toml:3.8.0"
+	modImplementation "curse.maven:forge-config-api-port-fabric-547434:5535847"
+	
+	// compile against the JEI API but do not include it at runtime
+	modCompileOnlyApi("mezz.jei:jei-1.21-common-api:${project.jei_version}")
+	modCompileOnlyApi("mezz.jei:jei-1.21-fabric-api:${project.jei_version}")
+	// at runtime, use the full JEI jar for Fabric
+	modRuntimeOnly("mezz.jei:jei-1.21-fabric:${project.jei_version}")
 }
 
 loom {
@@ -77,11 +83,11 @@ loom {
 sourceSets {
 	main {
 		java {
-			srcDir "../TomsPeripherals-1204/src/platform-shared/java"
+			srcDir "../TomsPeripherals-121/src/platform-shared/java"
 			srcDir "../TomsPeripherals/src/shared/java"
 		}
 		resources {
-			srcDir "../TomsPeripherals-1204/src/platform-shared/resources"
+			srcDir "../TomsPeripherals-121/src/platform-shared/resources"
 			srcDir "../TomsPeripherals/src/shared/resources"
 		}
 	}
@@ -96,8 +102,7 @@ processResources {
 }
 
 tasks.withType(JavaCompile).configureEach {
-	// Minecraft 1.18 (1.18-pre2) upwards uses Java 17.
-	it.options.release = 17
+	it.options.release = 21
 }
 
 java {

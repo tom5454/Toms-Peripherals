@@ -5,9 +5,9 @@ import java.util.Arrays;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.Mth;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 
+import com.tom.peripherals.Content;
 import com.tom.peripherals.api.LuaException;
 import com.tom.peripherals.api.LuaMethod;
 import com.tom.peripherals.api.ObjectWrapper;
@@ -32,8 +32,8 @@ public class RedstonePortBlockEntity extends AbstractPeripheralBlockEntity imple
 	private final int[] input = new int[6];
 	private final int[] bundledInput = new int[6];
 
-	public RedstonePortBlockEntity(BlockEntityType<?> p_155228_, BlockPos p_155229_, BlockState p_155230_) {
-		super(p_155228_, p_155229_, p_155230_);
+	public RedstonePortBlockEntity(BlockPos p_155229_, BlockState p_155230_) {
+		super(Content.redstonePortBE.get(), p_155229_, p_155230_);
 	}
 
 	@Override

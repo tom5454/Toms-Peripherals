@@ -7,7 +7,7 @@
   ],
   "key": {
   	"s": {
-      "tag": "minecraft:stone_crafting_materials"
+      "item": "minecraft:stone"
     },
     "c": {
       "item": "minecraft:comparator"
@@ -16,13 +16,13 @@
       "item": "minecraft:clock"
     },
     "R": {
-      "tag": "c:redstone_dusts"
+      "tag": "c:dusts/redstone"
     },
     "m": {
       "item": "computercraft:wired_modem"
     }
   },
   "result": {
-    "item": "toms_peripherals:wdt"
+    "id": "toms_peripherals:wdt"
   }
 }

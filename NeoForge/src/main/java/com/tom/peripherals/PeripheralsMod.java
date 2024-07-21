@@ -2,15 +2,17 @@ package com.tom.peripherals;
 
 import org.slf4j.Logger;
 
+import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.InterModComms;
+import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.ModList;
-import net.neoforged.fml.ModLoadingContext;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.fml.event.lifecycle.InterModEnqueueEvent;
+import net.neoforged.fml.loading.FMLEnvironment;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 
 import com.mojang.logging.LogUtils;
@@ -29,12 +31,13 @@ public class PeripheralsMod {
 	public static final String ID = "toms_peripherals";
 	public static final Logger LOGGER = LogUtils.getLogger();
 
-	public PeripheralsMod(IEventBus bus) {
+	public PeripheralsMod(ModContainer mc, IEventBus bus) {
 		bus.addListener(this::setup);
 		bus.addListener(this::doClientStuff);
 		bus.addListener(this::enqueueIMC);
-		ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.commonSpec);
-		ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, Config.serverSpec);
+		if (FMLEnvironment.dist == Dist.CLIENT)Client.preInit(mc, bus);
+		mc.registerConfig(ModConfig.Type.COMMON, Config.commonSpec);
+		mc.registerConfig(ModConfig.Type.SERVER, Config.serverSpec);
 		bus.register(ForgeConfig.class);
 		bus.register(Network.class);
 		bus.addListener(this::registerCapabilities);

@@ -5,9 +5,10 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerPlayer;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
-import net.neoforged.neoforge.network.event.RegisterPayloadHandlerEvent;
-import net.neoforged.neoforge.network.handling.PlayPayloadContext;
-import net.neoforged.neoforge.network.registration.IPayloadRegistrar;
+import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
+import net.neoforged.neoforge.network.handling.DirectionalPayloadHandler;
+import net.neoforged.neoforge.network.handling.IPayloadContext;
+import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 
 import com.tom.peripherals.PeripheralsMod;
 import com.tom.peripherals.util.IDataReceiver;
@@ -15,25 +16,23 @@ import com.tom.peripherals.util.IDataReceiver;
 public class Network {
 
 	@SubscribeEvent
-	public static void register(final RegisterPayloadHandlerEvent event) {
-		final IPayloadRegistrar registrar = event.registrar(PeripheralsMod.ID);
+	public static void register(RegisterPayloadHandlersEvent event) {
+		PayloadRegistrar registrar = event.registrar(PeripheralsMod.ID);
 
-		registrar.play(DataPacket.ID, DataPacket::new, handler -> handler
-				.client(Network::handleDataClient)
-				.server(Network::handleDataServer));
+		registrar.playBidirectional(DataPacket.ID, DataPacket.STREAM_CODEC, new DirectionalPayloadHandler<>(Network::handleDataClient, Network::handleDataServer));
 	}
 
-	public static void handleDataServer(DataPacket packet, PlayPayloadContext context) {
-		context.workHandler().submitAsync(() -> {
-			ServerPlayer sender = (ServerPlayer) context.player().orElseThrow();
+	public static void handleDataServer(DataPacket packet, IPayloadContext context) {
+		context.enqueueWork(() -> {
+			ServerPlayer sender = (ServerPlayer) context.player();
 			if(sender.containerMenu instanceof IDataReceiver) {
 				((IDataReceiver)sender.containerMenu).receive(packet.tag());
 			}
 		});
 	}
 
-	public static void handleDataClient(DataPacket packet, PlayPayloadContext context) {
-		context.workHandler().submitAsync(() -> {
+	public static void handleDataClient(DataPacket packet, IPayloadContext context) {
+		context.enqueueWork(() -> {
 			if(Minecraft.getInstance().screen instanceof IDataReceiver) {
 				((IDataReceiver)Minecraft.getInstance().screen).receive(packet.tag());
 			}
@@ -41,10 +40,10 @@ public class Network {
 	}
 
 	public static void sendToContainer(CompoundTag tag) {
-		PacketDistributor.SERVER.noArg().send(new DataPacket(tag));
+		PacketDistributor.sendToServer(new DataPacket(tag));
 	}
 
 	public static void sendTo(ServerPlayer pl, CompoundTag tag) {
-		PacketDistributor.PLAYER.with(pl).send(new DataPacket(tag));
+		PacketDistributor.sendToPlayer(pl, new DataPacket(tag));
 	}
 }

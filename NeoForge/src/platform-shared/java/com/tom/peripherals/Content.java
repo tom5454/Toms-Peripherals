@@ -3,6 +3,8 @@ package com.tom.peripherals;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.component.DataComponentType;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
@@ -11,6 +13,9 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityType.BlockEntitySupplier;
+
+import com.mojang.serialization.Codec;
 
 import com.tom.peripherals.block.GPUBlock;
 import com.tom.peripherals.block.KeyboardBlock;
@@ -28,7 +33,6 @@ import com.tom.peripherals.item.PortableKeyboardItem;
 import com.tom.peripherals.menu.KeyboardMenu;
 import com.tom.peripherals.platform.GameObject;
 import com.tom.peripherals.platform.GameObject.GameObjectBlockEntity;
-import com.tom.peripherals.platform.GameObject.GameRegistryBE.BlockEntityFactory;
 import com.tom.peripherals.platform.Platform;
 
 public class Content {
@@ -52,6 +56,9 @@ public class Content {
 
 	public static final GameObject<MenuType<KeyboardMenu>> keyboardMenu = menu("keyboard", KeyboardMenu::new);
 
+	public static final GameObject<DataComponentType<BlockPos>> boundPosComponent = Platform.DATA_COMPONENT_TYPES.register("bound_pos", () -> DataComponentType.<BlockPos>builder().persistent(BlockPos.CODEC).build());
+	public static final GameObject<DataComponentType<Boolean>> inUseComponent = Platform.DATA_COMPONENT_TYPES.register("in_use", () -> DataComponentType.<Boolean>builder().persistent(Codec.BOOL).build());
+
 	private static <B extends Block> GameObject<B> blockWithItem(String name, Supplier<B> create) {
 		return blockWithItem(name, create, b -> new BlockItem(b, new Item.Properties()));
 	}
@@ -68,7 +75,7 @@ public class Content {
 
 	@SuppressWarnings("unchecked")
 	@SafeVarargs
-	private static <BE extends BlockEntity> GameObjectBlockEntity<BE> blockEntity(String name, BlockEntityFactory<? extends BE> create, GameObject<? extends Block>... blocks) {
+	private static <BE extends BlockEntity> GameObjectBlockEntity<BE> blockEntity(String name, BlockEntitySupplier<? extends BE> create, GameObject<? extends Block>... blocks) {
 		return (GameObjectBlockEntity<BE>) Platform.BLOCK_ENTITY.registerBE(name, create, blocks);
 	}
 

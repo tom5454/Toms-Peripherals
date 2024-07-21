@@ -13,10 +13,10 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.Direction.Axis;
 import net.minecraft.server.TickTask;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 
 import com.tom.peripherals.Config;
+import com.tom.peripherals.Content;
 import com.tom.peripherals.api.IComputer;
 import com.tom.peripherals.api.ITMPeripheral;
 import com.tom.peripherals.api.LuaException;
@@ -33,8 +33,8 @@ import com.tom.peripherals.util.ParamCheck;
 public class GPUBlockEntity extends AbstractPeripheralBlockEntity {
 	private GPUPeripheral peripheral;
 
-	public GPUBlockEntity(BlockEntityType<?> p_155228_, BlockPos p_155229_, BlockState p_155230_) {
-		super(p_155228_, p_155229_, p_155230_);
+	public GPUBlockEntity(BlockPos p_155229_, BlockState p_155230_) {
+		super(Content.gpuBE.get(), p_155229_, p_155230_);
 	}
 
 	private class GPUPeripheral implements ITMPeripheral, GPUContext, VRAMObject {

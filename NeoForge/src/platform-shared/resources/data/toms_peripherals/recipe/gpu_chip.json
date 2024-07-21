@@ -4,7 +4,9 @@
   "ingredient": {
     "item": "toms_peripherals:gpu_chip_raw"
   },
-  "result": "toms_peripherals:gpu_chip",
+  "result": {
+	"id": "toms_peripherals:gpu_chip"
+  },
   "experience": 0.7,
   "cookingtime": 200
 }

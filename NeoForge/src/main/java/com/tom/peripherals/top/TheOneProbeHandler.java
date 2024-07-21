@@ -25,7 +25,7 @@ import mcjty.theoneprobe.api.TextStyleClass;
 import mcjty.theoneprobe.config.Config;
 
 public class TheOneProbeHandler implements Function<ITheOneProbe, Void>, IProbeInfoProvider {
-	private static final ResourceLocation ICONS = new ResourceLocation("theoneprobe", "textures/gui/icons.png");
+	private static final ResourceLocation ICONS = ResourceLocation.tryBuild("theoneprobe", "textures/gui/icons.png");
 	public static ITheOneProbe theOneProbeImp;
 
 	public static TheOneProbeHandler create() {
@@ -69,6 +69,6 @@ public class TheOneProbeHandler implements Function<ITheOneProbe, Void>, IProbeI
 
 	@Override
 	public ResourceLocation getID() {
-		return new ResourceLocation(PeripheralsMod.ID, "top");
+		return ResourceLocation.tryBuild(PeripheralsMod.ID, "top");
 	}
 }

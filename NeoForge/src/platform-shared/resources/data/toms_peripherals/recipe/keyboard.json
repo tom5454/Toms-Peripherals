@@ -10,13 +10,13 @@
       "tag": "minecraft:buttons"
     },
     "r": {
-      "tag": "c:redstone_dusts"
+      "tag": "c:dusts/redstone"
     },
     "s": {
-      "tag": "minecraft:stone_crafting_materials"
+      "item": "minecraft:stone"
     }
   },
   "result": {
-    "item": "toms_peripherals:keyboard"
+    "id": "toms_peripherals:keyboard"
   }
 }

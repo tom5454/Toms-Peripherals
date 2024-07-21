@@ -5,94 +5,79 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.function.Supplier;
 
-import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
-import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.entity.BlockEntityType.BlockEntitySupplier;
 
 import com.tom.peripherals.PeripheralsMod;
-import com.tom.peripherals.platform.GameObject.GameRegistryBE.BlockEntityFactory;
 
 public class GameObject<T> {
-	private final T value;
+	private final ResourceLocation id;
+	private final Supplier<? extends T> sup;
+	private T value;
 
-	private GameObject(T value) {
-		this.value = value;
+	private GameObject(ResourceLocation id,Supplier<? extends T> sup) {
+		this.id = id;
+		this.sup = sup;
 	}
-
-	/*public static <V, T extends V> GameObject<T> register(Registry<V> registry, ResourceLocation resourceLocation, T value) {
-		Registry.register(registry, resourceLocation, value);
-		return new GameObject<>(value);
-	}*/
 
 	public T get() {
 		return value;
 	}
 
+	protected T make() {
+		value = sup.get();
+		return value;
+	}
+
 	public static class GameRegistry<T> {
 		protected final Registry<T> registry;
+		protected List<GameObject<? extends T>> toRegister = new ArrayList<>();
 
 		public GameRegistry(Registry<T> registry) {
 			this.registry = registry;
 		}
 
 		public <I extends T> GameObject<I> register(final String name, final Supplier<? extends I> sup) {
-			I obj = sup.get();
-			Registry.register(registry, new ResourceLocation(PeripheralsMod.ID, name), obj);
-			return new GameObject<>(obj);
+			GameObject<I> obj = new GameObject<>(ResourceLocation.tryBuild(PeripheralsMod.ID, name), sup);
+			toRegister.add(obj);
+			return obj;
+		}
+
+		public void runRegistration() {
+			for (GameObject<? extends T> gameObject : toRegister) {
+				Registry.register(registry, gameObject.getId(), gameObject.make());
+			}
 		}
 	}
 
+	public ResourceLocation getId() {
+		return id;
+	}
+
 	public static class GameRegistryBE extends GameRegistry<BlockEntityType<?>> {
-		private List<GameObjectBlockEntity<?>> blockEntities = new ArrayList<>();
 
 		public GameRegistryBE(Registry<BlockEntityType<?>> registry) {
 			super(registry);
 		}
 
 		@SuppressWarnings("unchecked")
-		public <BE extends BlockEntity, I extends BlockEntityType<BE>> GameObjectBlockEntity<BE> registerBE(String name, BlockEntityFactory<BE> sup, GameObject<? extends Block>... blocks) {
-			GameObjectBlockEntity<BE> e = new GameObjectBlockEntity<>(this, name, new ArrayList<>(Arrays.asList(blocks)), sup);
-			blockEntities.add(e);
+		public <BE extends BlockEntity, I extends BlockEntityType<BE>> GameObjectBlockEntity<BE> registerBE(String name, BlockEntitySupplier<BE> sup, GameObject<? extends Block>... blocks) {
+			GameObjectBlockEntity<BE> e = new GameObjectBlockEntity<>(name, new ArrayList<>(Arrays.asList(blocks)), sup);
+			toRegister.add(e);
 			return e;
-		}
-
-		public void register() {
-			blockEntities.forEach(GameObjectBlockEntity::register);
-		}
-
-		public static interface BlockEntityFactory<T extends BlockEntity> {
-			T create(BlockEntityType<T> type, BlockPos pos, BlockState state);
 		}
 	}
 
 	public static class GameObjectBlockEntity<T extends BlockEntity> extends GameObject<BlockEntityType<T>> {
-		private BlockEntityType<T> value;
 		private List<GameObject<? extends Block>> blocks;
-		private BlockEntityFactory<T> factory;
-		private GameRegistryBE registry;
-		private String name;
 
-		public GameObjectBlockEntity(GameRegistryBE registry, String name, List<GameObject<? extends Block>> blocks, BlockEntityFactory<T> factory) {
-			super(null);
-			this.name = name;
+		public GameObjectBlockEntity(String name, List<GameObject<? extends Block>> blocks, BlockEntitySupplier<T> factory) {
+			super(ResourceLocation.tryBuild(PeripheralsMod.ID, name), () -> BlockEntityType.Builder.<T>of(factory, blocks.stream().map(GameObject::get).toArray(Block[]::new)).build(null));
 			this.blocks = blocks;
-			this.factory = factory;
-			this.registry = registry;
-		}
-
-		protected void register() {
-			value = FabricBlockEntityTypeBuilder.create((a, b) -> factory.create(value, a, b), blocks.stream().map(GameObject::get).toArray(Block[]::new)).build(null);
-			Registry.register(registry.registry, new ResourceLocation(PeripheralsMod.ID, name), value);
-		}
-
-		@Override
-		public BlockEntityType<T> get() {
-			return value;
 		}
 
 		@SuppressWarnings("unchecked")

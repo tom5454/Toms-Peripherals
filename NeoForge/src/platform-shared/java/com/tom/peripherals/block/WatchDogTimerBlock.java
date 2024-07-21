@@ -5,6 +5,7 @@ import java.util.List;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.DyeColor;
+import net.minecraft.world.item.Item.TooltipContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -62,7 +63,7 @@ public class WatchDogTimerBlock extends Block implements EntityBlock {
 	}
 
 	@Override
-	public void appendHoverText(ItemStack stack, BlockGetter world, List<Component> tooltip, TooltipFlag p_49819_) {
+	public void appendHoverText(ItemStack p_49816_, TooltipContext p_339606_, List<Component> tooltip, TooltipFlag p_49819_) {
 		ClientUtil.tooltip("wdt", tooltip);
 	}
 }

@@ -7,7 +7,7 @@
   ],
   "key": {
   	"I": {
-      "tag": "c:iron_ingots"
+      "tag": "c:ingots/iron"
     },
     "b": {
       "item": "minecraft:iron_bars"
@@ -16,13 +16,13 @@
       "item": "toms_peripherals:gpu_chip"
     },
     "C": {
-      "tag": "c:copper_ingots"
+      "tag": "c:ingots/copper"
     },
     "r": {
-      "tag": "c:redstone_dusts"
+      "tag": "c:dusts/redstone"
     }
   },
   "result": {
-    "item": "toms_peripherals:gpu"
+    "id": "toms_peripherals:gpu"
   }
 }

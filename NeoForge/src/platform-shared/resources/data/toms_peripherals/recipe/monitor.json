@@ -7,19 +7,19 @@
   ],
   "key": {
   	"I": {
-      "tag": "forge:ingots/iron"
+      "tag": "c:ingots/iron"
     },
     "L": {
       "item": "minecraft:redstone_lamp"
     },
     "g": {
-      "tag": "forge:glass_panes"
+      "tag": "c:glass_panes"
     },
     "m": {
       "item": "computercraft:monitor_advanced"
     }
   },
   "result": {
-    "item": "toms_peripherals:monitor"
+    "id": "toms_peripherals:monitor"
   }
 }

@@ -7,22 +7,22 @@
   ],
   "key": {
   	"g": {
-      "tag": "c:gold_ingots"
+      "tag": "c:ingots/gold"
     },
     "c": {
-      "tag": "c:copper_ingots"
+      "tag": "c:ingots/copper"
     },
     "r": {
-      "tag": "c:redstone_dusts"
+      "tag": "c:dusts/redstone"
     },
     "a": {
-      "item": "minecraft:amethyst_shard"
+      "tag": "c:gems/amethyst"
     },
     "d": {
-      "tag": "c:diamonds"
+      "tag": "c:gems/diamond"
     }
   },
   "result": {
-    "item": "toms_peripherals:gpu_chip_raw"
+    "id": "toms_peripherals:gpu_chip_raw"
   }
 }

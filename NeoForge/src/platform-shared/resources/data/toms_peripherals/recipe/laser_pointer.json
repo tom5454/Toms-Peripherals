@@ -10,16 +10,16 @@
       "tag": "minecraft:buttons"
     },
     "r": {
-      "tag": "c:redstone_dusts"
+      "tag": "c:dusts/redstone"
     },
     "c": {
-      "tag": "c:copper_ingots"
+      "tag": "c:ingots/copper"
     },
 	"a": {
-      "item": "minecraft:amethyst_shard"
+      "tag": "c:gems/amethyst"
     }
   },
   "result": {
-    "item": "toms_peripherals:laser_pointer"
+    "id": "toms_peripherals:laser_pointer"
   }
 }

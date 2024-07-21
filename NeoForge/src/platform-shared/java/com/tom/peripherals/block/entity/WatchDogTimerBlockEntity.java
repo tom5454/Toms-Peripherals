@@ -2,11 +2,13 @@ package com.tom.peripherals.block.entity;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 
+import com.tom.peripherals.Content;
 import com.tom.peripherals.api.LuaException;
 import com.tom.peripherals.api.LuaMethod;
 import com.tom.peripherals.api.ObjectWrapper;
@@ -24,8 +26,8 @@ public class WatchDogTimerBlockEntity extends AbstractPeripheralBlockEntity impl
 	private int timeLimit;
 	private int timer;
 
-	public WatchDogTimerBlockEntity(BlockEntityType<?> p_155228_, BlockPos p_155229_, BlockState p_155230_) {
-		super(p_155228_, p_155229_, p_155230_);
+	public WatchDogTimerBlockEntity(BlockPos p_155229_, BlockState p_155230_) {
+		super(Content.wdtBE.get(), p_155229_, p_155230_);
 	}
 
 	@Override
@@ -41,15 +43,15 @@ public class WatchDogTimerBlockEntity extends AbstractPeripheralBlockEntity impl
 	}
 
 	@Override
-	public void load(CompoundTag tag) {
-		super.load(tag);
+	protected void loadAdditional(CompoundTag tag, Provider p_338445_) {
+		super.loadAdditional(tag, p_338445_);
 		enabled = tag.getBoolean("enabled");
 		timeLimit = tag.getInt("timeLimit");
 	}
 
 	@Override
-	protected void saveAdditional(CompoundTag tag) {
-		super.saveAdditional(tag);
+	protected void saveAdditional(CompoundTag tag, HolderLookup.Provider provider) {
+		super.saveAdditional(tag, provider);
 		tag.putBoolean("enabled", enabled);
 		tag.putInt("timeLimit", timeLimit);
 	}

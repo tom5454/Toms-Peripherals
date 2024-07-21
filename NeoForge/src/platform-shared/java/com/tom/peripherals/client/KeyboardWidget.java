@@ -2,13 +2,13 @@ package com.tom.peripherals.client;
 
 import java.util.BitSet;
 
-import net.minecraft.SharedConstants;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.util.StringUtil;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 
@@ -80,7 +80,7 @@ public class KeyboardWidget extends AbstractWidget {
 							clipboard = clipboard.substring(0, newLineIndex2);
 						}
 
-						clipboard = SharedConstants.filterText(clipboard);
+						clipboard = StringUtil.filterText(clipboard);
 						if (!clipboard.isEmpty()) {
 							if (clipboard.length() > 512) {
 								clipboard = clipboard.substring(0, 512);
