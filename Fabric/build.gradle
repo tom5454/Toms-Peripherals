@@ -68,6 +68,8 @@ dependencies {
 	implementation "com.electronwill.night-config:core:3.6.3"
     implementation "com.electronwill.night-config:toml:3.6.3"
 	modImplementation "curse.maven:forge-config-api-port-fabric-547434:4583000"
+	
+	modImplementation("curse.maven:jade-324717:4573047")
 }
 
 loom {

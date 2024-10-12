@@ -8,6 +8,7 @@ import net.minecraftforge.fml.config.ModConfig;
 
 import com.mojang.logging.LogUtils;
 
+import com.tom.peripherals.gpu.font.FontManager;
 import com.tom.peripherals.network.Network;
 import com.tom.peripherals.platform.AbstractPeripheralBlockEntity;
 import com.tom.peripherals.platform.Platform;
@@ -44,6 +45,7 @@ public class PeripheralsMod implements ModInitializer {
 			return null;
 		}, Content.gpuBE.get(), Content.redstonePortBE.get(), Content.wdtBE.get(), Content.keyboardBE.get());
 		Network.initCommon();
+		FontManager.init();
 	}
 
 }

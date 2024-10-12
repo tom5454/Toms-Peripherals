@@ -209,6 +209,7 @@ dependencies {
     compileOnly fg.deobf('curse.maven:common-capabilities-247007:4620480')
     
     implementation fg.deobf("curse.maven:the-one-probe-245211:4629624")
+    implementation fg.deobf("local:Jade:1.20.1-forge-11.4.3")
 }
 
 // Example for how to get properties into the manifest for reading at runtime.

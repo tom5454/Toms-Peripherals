@@ -24,7 +24,10 @@
     ],
     "main": [
       "com.tom.peripherals.PeripheralsMod"
-    ]
+    ],
+    "jade": [
+		"com.tom.peripherals.jade.JadePlugin"
+	]
   },
   "mixins": [
   ],
