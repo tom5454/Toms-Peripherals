@@ -6,6 +6,8 @@ import net.minecraft.resources.ResourceLocation;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
+import net.neoforged.neoforge.client.gui.ConfigurationScreen;
+import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 
 import com.tom.peripherals.client.KeyboardScreen;
 import com.tom.peripherals.client.MonitorBlockEntityRenderer;
@@ -14,11 +16,7 @@ public class Client {
 
 	public static void preInit(ModContainer mc, IEventBus bus) {
 		bus.addListener(Client::registerScreens);
-
-		/*try {
-			mc.registerExtensionPoint(IConfigScreenFactory.class, ConfigurationScreen::new);
-		} catch (Throwable e) {
-		}*/
+		mc.registerExtensionPoint(IConfigScreenFactory.class, ConfigurationScreen::new);
 	}
 
 	private static void registerScreens(RegisterMenuScreensEvent e) {

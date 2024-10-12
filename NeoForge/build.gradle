@@ -147,7 +147,7 @@ dependencies {
   	implementation "curse.maven:the-one-probe-245211:5502323"
     implementation "curse.maven:jade-324717:5529595"
   	
-  	implementation 'curse.maven:cc-tweaked-282001:5502386'
+  	implementation 'curse.maven:cc-tweaked-282001:5583001'
 }
 
 // This block of code expands all declared replace properties in the specified resource targets.
@@ -165,7 +165,7 @@ tasks.withType(ProcessResources).configureEach {
     ]
     inputs.properties replaceProperties
 
-    filesMatching(['META-INF/mods.toml', 'pack.mcmeta']) {
+    filesMatching(['META-INF/neoforge.mods.toml', 'pack.mcmeta']) {
         expand replaceProperties + [project: project]
     }
 }

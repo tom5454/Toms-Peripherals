@@ -20,6 +20,15 @@
 	"label.toms_peripherals.keyboard.ccmon": "Left Click to activate monitor",
 	"label.toms_peripherals.keyboard.monitor": "Full mouse support enabled",
 	"label.toms_peripherals.keyboard.open": "Keyboard open. Press ESC to close.",
+	"label.toms_peripherals.modem.name": "Peripheral Name:",
+	"label.toms_peripherals.full_modem.list": "Peripherals per side:",
+	"label.toms_peripherals.full_modem.none": "No peripherals connected",
+	"label.toms_peripherals.side.down": "Down",
+	"label.toms_peripherals.side.up": "Up",
+	"label.toms_peripherals.side.north": "North",
+	"label.toms_peripherals.side.south": "South",
+	"label.toms_peripherals.side.east": "East",
+	"label.toms_peripherals.side.west": "West",
 	
 	"config.toms_peripherals.maxScreenSize": "Max Screen Size",
 	"config.toms_peripherals.maxVRAMSize": "Maximum VRAM Size in GPU peripherals",
@@ -34,5 +43,9 @@
 	
 	"chat.toms_peripherals.portable_keyboard.bound_success": "Bound Portable Keyboard",
 	"chat.toms_peripherals.dongle_out_of_range": "Dongle out of range",
-	"chat.toms_peripherals.dongle_not_found": "Dongle not found"
+	"chat.toms_peripherals.dongle_not_found": "Dongle not found",
+	
+	"config.jade.plugin_toms_peripherals.wdt_info": "[Tom's Peripherals] Watch Dog Timer Info",
+	"config.jade.plugin_toms_peripherals.modem_info": "[Tom's Peripherals] Cable Modem Info",
+	"config.jade.plugin_toms_peripherals.full_modem_info": "[Tom's Peripherals] Full Block Modem Info"
 }

@@ -1,7 +1,10 @@
 package com.tom.peripherals.top;
 
+import java.util.Locale;
 import java.util.function.Function;
 
+import net.minecraft.core.Direction;
+import net.minecraft.core.Direction.Axis;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
@@ -11,6 +14,11 @@ import net.minecraft.world.level.block.state.BlockState;
 
 import com.tom.peripherals.PeripheralsMod;
 import com.tom.peripherals.block.entity.WatchDogTimerBlockEntity;
+import com.tom.peripherals.util.InfoUtil;
+
+import dan200.computercraft.shared.peripheral.modem.wired.CableBlockEntity;
+import dan200.computercraft.shared.peripheral.modem.wired.WiredModemFullBlockEntity;
+import dan200.computercraft.shared.peripheral.modem.wired.WiredModemPeripheral;
 
 import mcjty.theoneprobe.api.CompoundText;
 import mcjty.theoneprobe.api.ElementAlignment;
@@ -57,6 +65,33 @@ public class TheOneProbeHandler implements Function<ITheOneProbe, Void>, IProbeI
 			}
 			probeInfo.text(Component.translatable("label.toms_peripherals.wdt.timeLimit", ticksToElapsedTime(be.getTimeLimit())));
 			probeInfo.text(Component.translatable("label.toms_peripherals.wdt.timer", ticksToElapsedTime(be.getTimer())));
+		} else if(te instanceof CableBlockEntity be) {
+			if (be.getPeripheral(null) instanceof WiredModemPeripheral modem) {
+				Object[] nameArray = modem.getNameLocal();
+				if (nameArray != null && nameArray.length == 1 && nameArray[0] instanceof String name) {
+					probeInfo.horizontal()
+					.text(Component.translatable("label.toms_peripherals.modem.name"))
+					.text(CompoundText.create().style(TextStyleClass.HIGHLIGHTED).text(Component.literal(name)));
+				}
+			}
+		} else if(te instanceof WiredModemFullBlockEntity be) {
+			probeInfo.text(Component.translatable("label.toms_peripherals.full_modem.list"));
+			boolean hasP = false;
+			for (Direction d : Direction.values()) {
+				var modem = be.getPeripheral(d);
+				if (modem != null) {
+					Object[] nameArray = modem.getNameLocal();
+					if (nameArray != null && nameArray.length == 1 && nameArray[0] instanceof String name) {
+						var h = probeInfo.horizontal()
+								.text(Component.translatable("label.toms_peripherals.side." + d.name().toLowerCase(Locale.ROOT)).append(":"))
+								.text(CompoundText.create().style(TextStyleClass.HIGHLIGHTED).text(Component.literal(name)));
+						if(d.getAxis() != Axis.Y)
+							h.text(Component.literal("(" + InfoUtil.getDirectionArrow(d.toYRot() - player.yRotO) + ")"));
+						hasP = true;
+					}
+				}
+			}
+			if (!hasP)probeInfo.text(Component.translatable("label.toms_peripherals.full_modem.none"));
 		}
 	}
 
