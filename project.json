@@ -1,0 +1,13 @@
+{
+  "type": "none",
+  "name": "TomsPeripherals-API",
+  "mcVer": "1.18",
+  "verId": "1.18",
+  "display": "API",
+  "onGit": true,
+  "subver": [
+  ],
+  "j17": true,
+  "depProjects": [
+  ]
+}
