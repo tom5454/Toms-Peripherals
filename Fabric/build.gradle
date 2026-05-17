@@ -69,12 +69,12 @@ loom {
 sourceSets {
 	main {
 		java {
-			srcDir "../TomsPeripherals-118/src/platform-shared/java"
-			srcDir "../TomsPeripherals/src/shared/java"
+			srcDir "../Forge/src/platform-shared/java"
+			srcDir "../../TomsPeripherals/src/shared/java"
 		}
 		resources {
-			srcDir "../TomsPeripherals-118/src/platform-shared/resources"
-			srcDir "../TomsPeripherals/src/shared/resources"
+			srcDir "../Forge/src/platform-shared/resources"
+			srcDir "../../TomsPeripherals/src/shared/resources"
 		}
 	}
 }
