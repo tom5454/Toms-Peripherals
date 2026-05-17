@@ -247,6 +247,8 @@ publishing {
         mavenJava(MavenPublication) {
             artifact jar
             artifact sourcesJar
+            
+            artifactId "TomsPeripherals-120" // Old naming scheme
         }
     }
     repositories {
