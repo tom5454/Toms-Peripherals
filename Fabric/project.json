@@ -1,0 +1,22 @@
+{
+  "type": "fabric",
+  "name": "toms_peripherals_fabric-1.21",
+  "mcVer": "1.21",
+  "verId": "1.21",
+  "display": "[Fabric] Tom's Peripherals 1.21",
+  "onGit": true,
+  "subver": [
+	"1.21"
+  ],
+  "j21": true,
+  "depProjects": [
+    {
+      "slug": "cc-tweaked",
+      "type": "requiredDependency"
+    },
+    {
+      "slug": "forge-config-api-port-fabric",
+      "type": "requiredDependency"
+    }
+  ]
+}

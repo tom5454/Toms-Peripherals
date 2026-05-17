@@ -3,7 +3,7 @@ plugins {
     id 'eclipse'
     id 'idea'
     id 'maven-publish'
-    id 'net.neoforged.gradle.userdev' version '7.0.142'
+    id 'net.neoforged.gradle.userdev' version '7.0.168'
 }
 
 version = mod_version
@@ -33,6 +33,17 @@ repositories {
     	name = "Jared's maven"
     	url = "https://maven.blamejared.com/"
 	}
+	exclusiveContent {
+        forRepository {
+            maven {
+                name = "Modrinth"
+                url = "https://api.modrinth.com/maven"
+            }
+        }
+        filter {
+            includeGroup "maven.modrinth"
+        }
+    }
 }
 
 base {
@@ -99,11 +110,11 @@ sourceSets {
 	main {
 		java {
 			srcDir "src/platform-shared/java"
-			srcDir "../TomsPeripherals/src/shared/java"
+			srcDir "../../TomsPeripherals/src/shared/java"
 		}
 		resources {
 			srcDir "src/platform-shared/resources"
-			srcDir "../TomsPeripherals/src/shared/resources"
+			srcDir "../../TomsPeripherals/src/shared/resources"
 		}
 	}
 }
@@ -147,7 +158,7 @@ dependencies {
   	implementation "curse.maven:the-one-probe-245211:5502323"
     implementation "curse.maven:jade-324717:5529595"
   	
-  	implementation 'curse.maven:cc-tweaked-282001:5583001'
+  	implementation 'maven.modrinth:cc-tweaked:h6qYZ1UT'
 }
 
 // This block of code expands all declared replace properties in the specified resource targets.

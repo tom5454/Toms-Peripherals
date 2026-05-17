@@ -1,0 +1,19 @@
+{
+  "type": "neoforge",
+  "name": "toms-peripherals-1.21",
+  "mcVer": "1.21",
+  "verId": "1.21",
+  "display": "[NeoForge] Tom's Peripherals 1.21",
+  "onGit": true,
+  "subver": [
+    "1.21",
+    "1.21.1"
+  ],
+  "j21": true,
+  "depProjects": [
+    {
+      "slug": "cc-tweaked",
+      "type": "requiredDependency"
+    }
+  ]
+}
