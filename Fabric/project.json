@@ -15,7 +15,7 @@
       "type": "requiredDependency"
     },
     {
-      "slug": "forge-config-api-port-fabric",
+      "slug": "forge-config-api-port",
       "type": "requiredDependency"
     }
   ]
