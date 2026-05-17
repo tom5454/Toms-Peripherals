@@ -50,7 +50,7 @@ public class PortableKeyboardItem extends Item {
 		BlockPos pos = stack.get(Content.boundPosComponent.get());
 		if(pos != null) {
 			if(!worldIn.isClientSide) {
-				if (playerIn.blockPosition().closerThan(pos, 64)) {
+				if (playerIn.distanceToSqr(Vec3.atCenterOf(pos)) < 64 * 64) {
 					BlockHitResult lookingAt = new BlockHitResult(Vec3.atCenterOf(pos), Direction.UP, pos, true);
 					BlockState state = worldIn.getBlockState(lookingAt.getBlockPos());
 					if (state.is(Content.keyboard_dongle.get())) {

@@ -11,6 +11,7 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.Vec3;
 
 import com.tom.peripherals.Content;
 import com.tom.peripherals.api.IComputer;
@@ -111,8 +112,9 @@ public class KeyboardBlockEntity extends AbstractPeripheralBlockEntity implement
 	}
 
 	public boolean menuStillValid(Player player) {
+		double dist = player.distanceToSqr(Vec3.atCenterOf(this.worldPosition));
 		if (getBlockState().is(Content.keyboard_dongle.get()))
-			return worldPosition.distSqr(player.blockPosition()) < 64 * 64;
-		return worldPosition.distSqr(player.blockPosition()) < 16 * 16;
+			return dist < 64 * 64;
+		return dist < 16 * 16;
 	}
 }
