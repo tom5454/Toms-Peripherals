@@ -1,0 +1,18 @@
+{
+  "type": "forge",
+  "name": "toms-peripherals-1.19.2",
+  "mcVer": "1.19",
+  "verId": "1.19",
+  "display": "[Forge] Tom's Peripherals 1.19.2",
+  "onGit": true,
+  "subver": [
+    "1.19.2"
+  ],
+  "j17": true,
+  "depProjects": [
+    {
+      "slug": "cc-tweaked",
+      "type": "requiredDependency"
+    }
+  ]
+}
