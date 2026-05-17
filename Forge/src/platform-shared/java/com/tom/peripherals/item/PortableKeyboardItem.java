@@ -53,7 +53,7 @@ public class PortableKeyboardItem extends Item {
 				int y = stack.getTag().getInt("BindY");
 				int z = stack.getTag().getInt("BindZ");
 				BlockPos pos = new BlockPos(x, y, z);
-				if (playerIn.blockPosition().closerThan(pos, 64)) {
+				if (playerIn.distanceToSqr(Vec3.atCenterOf(pos)) < 64 * 64) {
 					BlockHitResult lookingAt = new BlockHitResult(new Vec3(x, y, z), Direction.UP, pos, true);
 					BlockState state = worldIn.getBlockState(lookingAt.getBlockPos());
 					if (state.is(Content.keyboard_dongle.get())) {
