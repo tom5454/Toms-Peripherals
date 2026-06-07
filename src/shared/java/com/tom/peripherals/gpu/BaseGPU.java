@@ -224,10 +224,11 @@ public class BaseGPU extends TMLuaObject {
 			String s = ParamCheck.getString(a, 2);
 			char[] chars = s.toCharArray();
 			int l = getTextLength(chars, size, padding);
-			if (x < 0 || (l + x) > ctx.getWidth()) {
-				throw new LuaException("Out of boundary x " + x + ":" + (l + x));
+			int drawnLen = bg > -1 ? l : l - padding * size;
+			if (x < 0 || (drawnLen + x) > ctx.getWidth()) {
+				throw new LuaException("Out of boundary x " + x + ":" + (drawnLen + x));
 			}
-			if (y < 0 || (y + selectedFont.fontHeight) > ctx.getHeight()) {
+			if (y < 0 || (y + selectedFont.fontHeight * size) > ctx.getHeight()) {
 				throw new LuaException("Out of boundary y");
 			}
 			int wx = x;
