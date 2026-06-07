@@ -105,16 +105,25 @@ public class LuaImage extends ReferenceableLuaObject implements GPUContext, VRAM
 
 	@LuaMethod
 	public void setRGB(Object[] a) throws LuaException {
-		int x = ParamCheck.getInt(a, 0) + 1;
-		int y = ParamCheck.getInt(a, 1) + 1;
+		if (image == null)throw new LuaException("Error: Use after free");
+		int x = ParamCheck.getInt(a, 0) - 1;
+		int y = ParamCheck.getInt(a, 1) - 1;
+		checkBounds(x, y);
 		int rgb = ParamCheck.toColor(a, 2);
 		image.setRGB(x, y, rgb);
 	}
 
 	@LuaMethod
 	public int getRGB(Object[] a) throws LuaException {
-		int x = ParamCheck.getInt(a, 0) + 1;
-		int y = ParamCheck.getInt(a, 1) + 1;
+		if (image == null)throw new LuaException("Error: Use after free");
+		int x = ParamCheck.getInt(a, 0) - 1;
+		int y = ParamCheck.getInt(a, 1) - 1;
+		checkBounds(x, y);
 		return image.getRGB(x, y);
+	}
+
+	private void checkBounds(int x, int y) throws LuaException {
+		if (x < 0 || y < 0 || x >= image.getWidth() || y >= image.getHeight())
+			throw new LuaException("Out of boundary: " + (x + 1) + "," + (y + 1));
 	}
 }
